@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "Toyota Camry",
+    "make": "Toyota",
+    "year": 2022,
+    "imgURL": "https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/efc2df08-a513-4caa-ab68-6310da6e72ff/d9e3b2c0-552e-4764-ba72-ba207220d907.png",
+    "specs": {
+      "engine": "2.5L Inline-4",
+      "mileage": "28 mpg",
+      "dimensions": {
+        "length": 192.7,
+        "width": 72.4,
+        "height": 56.9
+      },
+      "horsepower": 203,
+      "zeroToSixty": 7.6
+    }
+  },
+  {
+    "id": 2,
+    "name": "Honda Accord",
+    "make": "Honda",
+    "year": 2023,
+    "imgURL": "https://service.secureoffersites.com/images/GetEvoxImage?styleid=425351&vin=1HGCV1F36NA036039&vehicletype=Sedan&angle=01&Type=jpeg&quality=80&BackGroundColor=white&colorcode=WX&height=350&useoverrides=True",
+    "specs": {
+      "engine": "1.5L Turbocharged Inline-4",
+      "mileage": "30 mpg",
+      "dimensions": {
+        "length": 192.2,
+        "width": 73.3,
+        "height": 57.1
+      },
+      "horsepower": 192,
+      "zeroToSixty": 7.3
+    }
+  },
+  {
+    "id": 3,
+    "name": "Ford Mustang",
+    "make": "Ford",
+    "year": 2024,
+    "imgURL": "https://alcf.s3.us-west-1.amazonaws.com/_custom/2024/ford/mustang/2024%20ford%20mustang%20%281%29.png",
+    "specs": {
+      "engine": "5.0L V8",
+      "mileage": "19 mpg",
+      "dimensions": {
+        "length": 188.5,
+        "width": 75.4,
+        "height": 54.3
+      },
+      "horsepower": 450,
+      "zeroToSixty": 4.3
+    }
+  }
+]
+
