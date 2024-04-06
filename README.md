@@ -22,7 +22,7 @@ Retrieve a list of cars based on optional query parameters.
   - `name`: Filter cars by name (optional).
   - `year`: Filter cars by manufacturing year (optional).
   - `make`: Filter cars by manufacturer (optional).
-- **Example Usage**: `/cars/?name=Toyota&year=2022&make=Camry`
+- **Example Usage**: `cars/?year=2022&make=Toyota`
 
 ### Car Specifications
 
