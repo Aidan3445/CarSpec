@@ -62,14 +62,10 @@ app.get("/api/cars", async (req, res) => {
     }
 });
 
-app.get("/api/specs/", async (req, res) => {
+app.get("/api/specs/:id", async (req, res) => {
     try {
-        // get the car with the id from the query
-        var id = req.query.id;
-        if (!id) {
-            return res.status(400).json({ error: "id is required" });
-        }
         // find the car with the id, use == to match string and number
+        var id = req.params.id;
         var car = cars.find((car) => car.id == id);
 
         // if the car is not found
@@ -77,7 +73,7 @@ app.get("/api/specs/", async (req, res) => {
             return res.status(404).json({ error: "Car not found" });
         }
 
-        return res.json({ ...car.specs, id: car.id });
+        return res.json({ id: car.id, ...car.specs });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" });
