@@ -53,10 +53,13 @@ app.get("/api/cars", async (req, res) => {
     }
 });
 
-app.get("/api/specs/:id", async (req, res) => {
+app.get("/api/specs/", async (req, res) => {
     try {
-        // get the car with the id
-        var id = req.params.id;
+        // get the car with the id from the query
+        var id = req.query.id;
+        if (!id) {
+            return res.status(400).json({ error: "id is required" });
+        }
         var car = cars.find((car) => {
             // use == instead of === because the id is a string from the url
             return car.id == id;
