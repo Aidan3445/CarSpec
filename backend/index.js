@@ -1,79 +1,48 @@
-const express = require("express");
-const cors = require("cors");
-const env = require("dotenv");
+// Copyright 2021 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
-const cars = require("./data/carData.json");
+import app from './app.js';
+import {logger, initLogCorrelation} from './utils/logging.js';
+import {fetchProjectId} from './utils/metadata.js';
 
-env.config();
-const app = express();
-app.listen(process.env.PORT || 1332, async () => {
-    console.log(`Server running on port ${process.env.PORT || 1332}!`);
-});
-
-app.use(cors());
-app.use(express.json());
-
-app.get("/api/cars", async (req, res) => {
+/**
+ * Initialize app and start Express server
+ */
+const main = async () => {
+  let project = process.env.GOOGLE_CLOUD_PROJECT;
+  if (!project) {
     try {
-        var result = cars;
-
-        // Filtering the cars based on the query parameters
-        for (const key in req.query) {
-            if (req.query.hasOwnProperty(key)) {
-                const value = req.query[key];
-                // if value is an array
-                if (Array.isArray(value)) {
-                    result = result.filter((car) => {
-                        return value.includes(car[key]);
-                    });
-                } else {
-                    // if value is a string
-                    result = result.filter((car) => {
-                        return car[key] === value;
-                    });
-                }
-            }
-        }
-
-        // only return the main fields
-        result = result.map((car) => {
-            return {
-                name: car.name,
-                make: car.make,
-                year: car.year,
-                img: car.imgURL,
-            };
-        });
-
-        // return the result
-        return res.json(result);
+      project = await fetchProjectId();
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Server error" });
+      logger.warn('Could not fetch Project Id for tracing.');
     }
+  }
+  // Initialize request-based logger with project Id
+  initLogCorrelation(project);
+
+  // Start server listening on PORT env var
+  const PORT = process.env.PORT || 8080;
+  app.listen(PORT, () => logger.info(`Listening on port ${PORT}`));
+};
+
+/**
+ * Listen for termination signal
+ */
+process.on('SIGTERM', () => {
+  // Clean up resources on shutdown
+  logger.info('Caught SIGTERM.');
+  logger.flush();
 });
 
-app.get("/api/specs/", async (req, res) => {
-    try {
-        // get the car with the id from the query
-        var id = req.query.id;
-        if (!id) {
-            return res.status(400).json({ error: "id is required" });
-        }
-        var car = cars.find((car) => {
-            // use == instead of === because the id is a string from the url
-            return car.id == id;
-        });
-
-        // if the car is not found
-        if (!car) {
-            return res.status(404).json({ error: "Car not found" });
-        }
-
-        return res.json(car.specs);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Server error" });
-    }
-});
-//#endregion
+main();
