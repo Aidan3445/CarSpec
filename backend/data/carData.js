@@ -1,4 +1,4 @@
-[
+export default [
     {
         "id": 1,
         "name": "Toyota Camry",
@@ -92,7 +92,7 @@
     {
         "id": 6,
         "name": "Audi A4",
-        "make": "Audi", 
+        "make": "Audi",
         "year": 2024,
         "imgURL": "https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/cr/model-years/15099-2023-audi-a4",
         "specs": {

@@ -14,7 +14,7 @@
 
 import express from 'express';
 import { pinoHttp } from './utils/logging.js';
-import cars from './data/cars.json';
+import cars from './data/carData.js';
 
 const app = express();
 
