@@ -39,7 +39,7 @@ export default [
         "id": 3,
         "name": "Ford Mustang",
         "make": "Ford",
-        "year": 2024,
+        "year": 2020,
         "imgURL": "https://alcf.s3.us-west-1.amazonaws.com/_custom/2024/ford/mustang/2024%20ford%20mustang%20%281%29.png",
         "specs": {
             "engine": "5.0L V8",
@@ -57,7 +57,7 @@ export default [
         "id": 4,
         "name": "Chevrolet Malibu",
         "make": "Chevrolet",
-        "year": 2022,
+        "year": 2019,
         "imgURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToXmztW6LPJb8BfqCi_nXQao7VABOzrMy54sW5ZRpUdYl3t8Ub",
         "specs": {
             "engine": "1.5L Turbocharged Inline-4",
@@ -75,7 +75,7 @@ export default [
         "id": 5,
         "name": "BMW 3 Series",
         "make": "BMW",
-        "year": 2023,
+        "year": 2019,
         "imgURL": "https://www.bmw.com/content/dam/bmw/common/all-models/3-series/sedan/2022/navigation/bmw-3-series-sedan-lci-phev-modelfinder.png",
         "specs": {
             "engine": "2.0L Turbocharged Inline-4",
@@ -93,7 +93,7 @@ export default [
         "id": 6,
         "name": "Audi A4",
         "make": "Audi",
-        "year": 2024,
+        "year": 2017,
         "imgURL": "https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/cr/model-years/15099-2023-audi-a4",
         "specs": {
             "engine": "2.0L Turbocharged Inline-4",
@@ -111,7 +111,7 @@ export default [
         "id": 7,
         "name": "Mercedes-Benz C-Class",
         "make": "Mercedes-Benz",
-        "year": 2022,
+        "year": 2019,
         "imgURL": "https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/cr/car-versions/21783-2022-mercedes-benz-c-class-premium",
         "specs": {
             "engine": "2.0L Turbocharged Inline-4",
@@ -129,7 +129,7 @@ export default [
         "id": 8,
         "name": "Lexus ES",
         "make": "Lexus",
-        "year": 2023,
+        "year": 2018,
         "imgURL": "https://www.lexus.com/content/dam/lexus/images/models/es/2024/visualizer/350/exterior/17-twin-v-spoke-alloy-dark-metallic-machined-finish/eminent-white-pearl/small-1.jpg",
         "specs": {
             "engine": "3.5L V6",
@@ -147,7 +147,7 @@ export default [
         "id": 9,
         "name": "Subaru Outback",
         "make": "Subaru",
-        "year": 2024,
+        "year": 2018,
         "imgURL": "https://s7d1.scene7.com/is/image/scom/RDI_UAT_360e_032?$750p$",
         "specs": {
             "engine": "2.5L Flat-4",
@@ -165,7 +165,7 @@ export default [
         "id": 10,
         "name": "Nissan Altima",
         "make": "Nissan",
-        "year": 2022,
+        "year": 2020,
         "imgURL": "https://cars.usnews.com/static/images/Auto/izmo/i4912199/2017_nissan_altima_angularfront.jpg",
         "specs": {
             "engine": "2.5L Inline-4",
@@ -219,7 +219,7 @@ export default [
         "id": 13,
         "name": "Tesla Model 3",
         "make": "Tesla",
-        "year": 2022,
+        "year": 2017,
         "imgURL": "https://www.tesla.com/sites/default/files/images/support/Meet-Your-Tesla-Model-3.png",
         "specs": {
             "engine": "Electric",
@@ -273,7 +273,7 @@ export default [
         "id": 16,
         "name": "Acura TLX",
         "make": "Acura",
-        "year": 2023,
+        "year": 2018,
         "imgURL": "https://www.acura.com/-/media/Acura-Platform/miscellaneous-pages/global-navigation/nav-flyout-vehicles/2024/TLX/Vehicle_drop_down.png",
         "specs": {
             "engine": "2.0L Turbocharged Inline-4",
@@ -291,7 +291,7 @@ export default [
         "id": 17,
         "name": "Genesis G80",
         "make": "Genesis",
-        "year": 2022,
+        "year": 2019,
         "imgURL": "https://inv.assets.ansira.net/ChromeColorMatch/us/TRANSPARENT_cc_2023GSC010012_01_1280_NRB.png",
         "specs": {
             "engine": "2.5L Turbocharged Inline-4",
@@ -345,7 +345,7 @@ export default [
         "id": 20,
         "name": "Infiniti Q50",
         "make": "Infiniti",
-        "year": 2023,
+        "year": 2020,
         "imgURL": "https://edgecast-img.yahoo.net/mysterio/api/3E2473B74AC54A5398A4C3B3434DE411411A2B4E72D7909286457E70A810A79D/autoblog/resizefill_w660_h372;quality_80;format_webp;cc_31536000;/https://s.aolcdn.com/commerce/autodata/images/USC80INC261A021001.jpg",
         "specs": {
             "engine": "3.0L Twin-Turbocharged V6",

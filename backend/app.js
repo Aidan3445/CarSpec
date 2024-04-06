@@ -32,12 +32,12 @@ app.get("/api/cars", async (req, res) => {
                 // if value is an array
                 if (Array.isArray(value)) {
                     result = result.filter((car) => {
-                        return value.includes(car[key]);
+                        return value.find((v) => car[key] == v) !== undefined;
                     });
                 } else {
                     // if value is a string
                     result = result.filter((car) => {
-                        return car[key] === value;
+                        return car[key] == value;
                     });
                 }
             }
@@ -46,6 +46,7 @@ app.get("/api/cars", async (req, res) => {
         // only return the main fields
         result = result.map((car) => {
             return {
+                id: car.id,
                 name: car.name,
                 make: car.make,
                 year: car.year,
@@ -68,17 +69,15 @@ app.get("/api/specs/", async (req, res) => {
         if (!id) {
             return res.status(400).json({ error: "id is required" });
         }
-        var car = cars.find((car) => {
-            // use == instead of === because the id is a string from the url
-            return car.id == id;
-        });
+        // find the car with the id, use == to match string and number
+        var car = cars.find((car) => car.id == id);
 
         // if the car is not found
         if (!car) {
             return res.status(404).json({ error: "Car not found" });
         }
 
-        return res.json(car.specs);
+        return res.json({ ...car.specs, id: car.id });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" });
