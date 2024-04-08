@@ -8,7 +8,7 @@ Welcome to the Car Spec API! This API provides comprehensive information about c
 The base URL for accessing the Car Spec API is:
 
 `
-https://car-spec.adaptable.app/
+https://car-spec.adaptable.app/api/
 `
 
 ## Endpoints
