@@ -13,8 +13,7 @@ import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -23,6 +22,8 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import neu.mobileappdev.carspec.R
 
 val navIcons =
@@ -34,8 +35,11 @@ val navIcons =
 
 @Preview(showBackground = true)
 @Composable
-fun NavMenu() {
-    var tabIndex by remember { mutableIntStateOf(0) }
+fun NavMenu(
+    viewModel: NavMenuViewModel = NavMenuViewModel(),
+    navController: NavController = rememberNavController(),
+) {
+    val tabIndex by viewModel.pageIndex.observeAsState(0)
 
     Column(
         modifier =
@@ -52,13 +56,16 @@ fun NavMenu() {
             indicator = { tabPositions ->
                 val tabPosition = tabPositions[tabIndex]
                 SecondaryIndicator(
-                    modifier = Modifier
-                        .tabIndicatorOffset(tabPosition)
-                        .fillMaxSize()
-                        .shadow(15.dp,
-                            ambientColor = colorResource(R.color.selected_tab),
-                            spotColor = colorResource(R.color.black),
-                            clip = false),
+                    modifier =
+                        Modifier
+                            .tabIndicatorOffset(tabPosition)
+                            .fillMaxSize()
+                            .shadow(
+                                15.dp,
+                                ambientColor = colorResource(R.color.selected_tab),
+                                spotColor = colorResource(R.color.black),
+                                clip = false,
+                            ),
                     color = colorResource(id = R.color.selected_tab),
                 )
             },
@@ -74,8 +81,9 @@ fun NavMenu() {
                     selected = tabIndex == index,
                     selectedContentColor = colorResource(id = R.color.selected_tab),
                     onClick = {
-                        tabIndex = index
-                        Log.d("NavMenu", "Tab index: $tabIndex")
+                        Log.d("NavMenu", "Tab index: page$index")
+                        viewModel.setPageIndex(index)
+                        navController.navigate("page$index")
                     },
                 )
             }

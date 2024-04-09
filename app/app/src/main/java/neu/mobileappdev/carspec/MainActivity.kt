@@ -10,13 +10,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,11 +25,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import neu.mobileappdev.carspec.ui.navigation.NavGraph
 import neu.mobileappdev.carspec.ui.navigation.NavMenu
+import neu.mobileappdev.carspec.ui.navigation.NavMenuViewModel
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,6 +43,11 @@ class MainActivity : ComponentActivity() {
     @Preview(showBackground = true)
     @Composable
     fun Content() {
+        val navController = rememberNavController()
+        val navMenuViewModel = NavMenuViewModel()
+
+        val navBackStackEntry by navController.currentBackStackEntryAsState()
+
         Column(
             modifier = Modifier.fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -51,10 +56,10 @@ class MainActivity : ComponentActivity() {
             // App name
             Box(
                 modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .background(colorResource(id = R.color.purple_700))
-                    .padding(0.dp, 10.dp),
+                    Modifier
+                        .fillMaxWidth()
+                        .background(colorResource(id = R.color.purple_700))
+                        .padding(0.dp, 10.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
@@ -65,8 +70,37 @@ class MainActivity : ComponentActivity() {
                 )
             }
 
-            // Navigation
-            NavMenu()
+            // NavHost
+            NavHost(
+                navController = navController,
+                startDestination = NavGraph.login,
+//                enterTransition = { Animations.enterRight },
+//                exitTransition = { Animations.exitLeft },
+//                popEnterTransition = { Animations.enterLeft },
+//                popExitTransition = { Animations.exitRight },
+            ) {
+                composable(NavGraph.login) {
+                    Text(text = "Login")
+                    Button(onClick = {
+                        navController.navigate(NavGraph.home)
+                    }) {
+                    }
+                }
+                composable(NavGraph.home) {
+                    Text(text = "Home")
+                }
+                composable(NavGraph.favorites) {
+                    Text(text = "Favorites")
+                }
+                composable(NavGraph.search) {
+                    Text(text = "Search")
+                }
+            }
+
+            // Navigation menu
+            if (navBackStackEntry?.destination?.route != NavGraph.login) {
+                NavMenu(navMenuViewModel, navController)
+            }
         }
     }
 }
