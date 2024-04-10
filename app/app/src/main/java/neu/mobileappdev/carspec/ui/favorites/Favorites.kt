@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import neu.mobileappdev.carspec.R
+import neu.mobileappdev.carspec.ui.navigation.NavMenuViewModel
 
 val navIcons =
     listOf(

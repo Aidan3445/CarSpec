@@ -5,4 +5,5 @@ object NavGraph {
     val home: String = "page0"
     val favorites: String = "page1"
     val search: String = "page2"
+    val car: String = "car"
 }

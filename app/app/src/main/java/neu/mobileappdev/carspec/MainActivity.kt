@@ -27,6 +27,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import neu.mobileappdev.carspec.ui.home.Home
 import neu.mobileappdev.carspec.ui.navigation.NavGraph
 import neu.mobileappdev.carspec.ui.navigation.NavMenu
 import neu.mobileappdev.carspec.ui.navigation.NavMenuViewModel
@@ -56,10 +57,10 @@ class MainActivity : ComponentActivity() {
             // App name
             Box(
                 modifier =
-                    Modifier
-                        .fillMaxWidth()
-                        .background(colorResource(id = R.color.purple_700))
-                        .padding(0.dp, 10.dp),
+                Modifier
+                    .fillMaxWidth()
+                    .background(colorResource(id = R.color.purple_700))
+                    .padding(0.dp, 10.dp),
                 contentAlignment = Alignment.Center,
             ) {
                 Text(
@@ -87,7 +88,7 @@ class MainActivity : ComponentActivity() {
                     }
                 }
                 composable(NavGraph.home) {
-                    Text(text = "Home")
+                    Home(navController)
                 }
                 composable(NavGraph.favorites) {
                     Text(text = "Favorites")
@@ -95,11 +96,14 @@ class MainActivity : ComponentActivity() {
                 composable(NavGraph.search) {
                     Text(text = "Search")
                 }
+                composable(NavGraph.car) {
+                    Text(text = "Car")
+                }
             }
 
             // Navigation menu
             if (navBackStackEntry?.destination?.route != NavGraph.login) {
-                NavMenu(navMenuViewModel, navController)
+                NavMenu(navController,  navMenuViewModel)
             }
         }
     }

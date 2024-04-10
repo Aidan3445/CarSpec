@@ -36,9 +36,9 @@ val navIcons =
 @Preview(showBackground = true)
 @Composable
 fun NavMenu(
-    viewModel: NavMenuViewModel = NavMenuViewModel(),
     navController: NavController = rememberNavController(),
-) {
+    viewModel: NavMenuViewModel = NavMenuViewModel(),
+    ) {
     val tabIndex by viewModel.pageIndex.observeAsState(0)
 
     Column(
@@ -79,7 +79,7 @@ fun NavMenu(
                         )
                     },
                     selected = tabIndex == index,
-                    selectedContentColor = colorResource(id = R.color.selected_tab),
+                    selectedContentColor = Color.White,
                     onClick = {
                         Log.d("NavMenu", "Tab index: page$index")
                         viewModel.setPageIndex(index)
