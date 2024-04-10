@@ -1,7 +1,7 @@
 export default [
     {
         "id": 1,
-        "name": "Toyota Camry",
+        "name": "Camry",
         "make": "Toyota",
         "year": 2022,
         "imgURL": "https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/efc2df08-a513-4caa-ab68-6310da6e72ff/d9e3b2c0-552e-4764-ba72-ba207220d907.png",
@@ -19,7 +19,7 @@ export default [
     },
     {
         "id": 2,
-        "name": "Honda Accord",
+        "name": "Accord",
         "make": "Honda",
         "year": 2023,
         "imgURL": "https://service.secureoffersites.com/images/GetEvoxImage?styleid=425351&vin=1HGCV1F36NA036039&vehicletype=Sedan&angle=01&Type=jpeg&quality=80&BackGroundColor=white&colorcode=WX&height=350&useoverrides=True",
@@ -37,7 +37,7 @@ export default [
     },
     {
         "id": 3,
-        "name": "Ford Mustang",
+        "name": "Mustang",
         "make": "Ford",
         "year": 2020,
         "imgURL": "https://alcf.s3.us-west-1.amazonaws.com/_custom/2024/ford/mustang/2024%20ford%20mustang%20%281%29.png",
@@ -55,7 +55,7 @@ export default [
     },
     {
         "id": 4,
-        "name": "Chevrolet Malibu",
+        "name": "Malibu",
         "make": "Chevrolet",
         "year": 2019,
         "imgURL": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToXmztW6LPJb8BfqCi_nXQao7VABOzrMy54sW5ZRpUdYl3t8Ub",
@@ -91,7 +91,7 @@ export default [
     },
     {
         "id": 6,
-        "name": "Audi A4",
+        "name": "A4",
         "make": "Audi",
         "year": 2017,
         "imgURL": "https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/cr/model-years/15099-2023-audi-a4",
@@ -109,7 +109,7 @@ export default [
     },
     {
         "id": 7,
-        "name": "Mercedes-Benz C-Class",
+        "name": "C-Class",
         "make": "Mercedes-Benz",
         "year": 2019,
         "imgURL": "https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/cr/car-versions/21783-2022-mercedes-benz-c-class-premium",
@@ -127,7 +127,7 @@ export default [
     },
     {
         "id": 8,
-        "name": "Lexus ES",
+        "name": "ES",
         "make": "Lexus",
         "year": 2018,
         "imgURL": "https://www.lexus.com/content/dam/lexus/images/models/es/2024/visualizer/350/exterior/17-twin-v-spoke-alloy-dark-metallic-machined-finish/eminent-white-pearl/small-1.jpg",
@@ -145,7 +145,7 @@ export default [
     },
     {
         "id": 9,
-        "name": "Subaru Outback",
+        "name": "Outback",
         "make": "Subaru",
         "year": 2018,
         "imgURL": "https://s7d1.scene7.com/is/image/scom/RDI_UAT_360e_032?$750p$",
@@ -163,7 +163,7 @@ export default [
     },
     {
         "id": 10,
-        "name": "Nissan Altima",
+        "name": "Altima",
         "make": "Nissan",
         "year": 2020,
         "imgURL": "https://cars.usnews.com/static/images/Auto/izmo/i4912199/2017_nissan_altima_angularfront.jpg",
@@ -181,7 +181,7 @@ export default [
     },
     {
         "id": 11,
-        "name": "Volkswagen Passat",
+        "name": "Passat",
         "make": "Volkswagen",
         "year": 2023,
         "imgURL": "https://di-uploads-pod10.dealerinspire.com/timmonsvolkswagenoflongbeach/uploads/2017/12/2018-Volkswagen-Passat-1.png",
@@ -199,7 +199,7 @@ export default [
     },
     {
         "id": 12,
-        "name": "Jeep Grand Cherokee",
+        "name": "Grand Cherokee",
         "make": "Jeep",
         "year": 2024,
         "imgURL": "https://www.greenbriercdjr.com/static/dealer-23595/aronson/2024/Grand_Cherokee/24Jeep-GrandCherokee-SummitReserve-RockyMountainBlack-Jellybean.png",
@@ -217,7 +217,7 @@ export default [
     },
     {
         "id": 13,
-        "name": "Tesla Model 3",
+        "name": "Model 3",
         "make": "Tesla",
         "year": 2017,
         "imgURL": "https://www.tesla.com/sites/default/files/images/support/Meet-Your-Tesla-Model-3.png",
@@ -235,7 +235,7 @@ export default [
     },
     {
         "id": 14,
-        "name": "Hyundai Sonata",
+        "name": "Sonata",
         "make": "Hyundai",
         "year": 2023,
         "imgURL": "https://edgecast-img.yahoo.net/mysterio/api/7DD25F970C3CBF86C4E7E6356924450446C629517366895560885E21E27DF66E/autoblog/resizefill_w660_h372;quality_80;format_webp;cc_31536000;/https://s.aolcdn.com/commerce/autodata/images/USC80HYC031C021001.jpg",
@@ -253,7 +253,7 @@ export default [
     },
     {
         "id": 15,
-        "name": "Kia Optima",
+        "name": "Optima",
         "make": "Kia",
         "year": 2022,
         "imgURL": "https://cars.usnews.com/static/images/Auto/izmo/i2314290/2016_kia_optima_angularfront.jpg",
@@ -271,7 +271,7 @@ export default [
     },
     {
         "id": 16,
-        "name": "Acura TLX",
+        "name": "TLX",
         "make": "Acura",
         "year": 2018,
         "imgURL": "https://www.acura.com/-/media/Acura-Platform/miscellaneous-pages/global-navigation/nav-flyout-vehicles/2024/TLX/Vehicle_drop_down.png",
@@ -289,7 +289,7 @@ export default [
     },
     {
         "id": 17,
-        "name": "Genesis G80",
+        "name": "G80",
         "make": "Genesis",
         "year": 2019,
         "imgURL": "https://inv.assets.ansira.net/ChromeColorMatch/us/TRANSPARENT_cc_2023GSC010012_01_1280_NRB.png",
@@ -307,7 +307,7 @@ export default [
     },
     {
         "id": 18,
-        "name": "Volvo S60",
+        "name": "S60",
         "make": "Volvo",
         "year": 2023,
         "imgURL": "https://platform.cstatic-images.com/xlarge/in/v2/stock_photos/4dcddc73-9b34-4312-bd0b-4a640282458a/d28c32ba-74fb-4f22-b336-2f587161afd5.png",
@@ -325,7 +325,7 @@ export default [
     },
     {
         "id": 19,
-        "name": "Mazda 6",
+        "name": "6",
         "make": "Mazda",
         "year": 2022,
         "imgURL": "https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/chrome/white/2021MAC140031_1280_01",
@@ -343,7 +343,7 @@ export default [
     },
     {
         "id": 20,
-        "name": "Infiniti Q50",
+        "name": "Q50",
         "make": "Infiniti",
         "year": 2020,
         "imgURL": "https://edgecast-img.yahoo.net/mysterio/api/3E2473B74AC54A5398A4C3B3434DE411411A2B4E72D7909286457E70A810A79D/autoblog/resizefill_w660_h372;quality_80;format_webp;cc_31536000;/https://s.aolcdn.com/commerce/autodata/images/USC80INC261A021001.jpg",
@@ -361,7 +361,7 @@ export default [
     },
     {
         "id": 21,
-        "name": "Porsche Panamera",
+        "name": "Panamera",
         "make": "Porsche",
         "year": 2022,
         "imgURL": "https://pictures.porsche.com/rtt/iris?COSY-EU-100-1711coMvsi60AAt5FwcmBEgA4qP8iBUDxPE3Cb9pNXABuN9dMGF4tl3U0%25z8rMHIspMBvMZq6G5OtgSv31nBJaA4qh4NSEGkaW%25cz91wxuzbUUdMGLqk0D3LF%25vUqb2wuWXsO01JeV6iTmzizhRc2hpKqA7fQxmVOJUPY16MTBsN5bzt2dioCPVWQDcFGF8lYnfuruJd5yPeweoDCvNzxzW7GXoq1qgBr6FObXgHwRuT06sqx7e2HfTQDcFGSZ9YnfurMWu5yPewE7oCvNzxKjYGXoq1SoUr6hnQs1ITngI76wC98Q",
@@ -379,7 +379,7 @@ export default [
     },
     {
         "id": 22,
-        "name": "Jaguar XF",
+        "name": "XF",
         "make": "Jaguar",
         "year": 2023,
         "imgURL": "https://images.dealer.com/ddc/vehicles/2024/Jaguar/XF/Sedan/color/British%20Racing%20Green%20Metallic-1DQ-18,41,35-640-en_US.jpg",
@@ -397,7 +397,7 @@ export default [
     },
     {
         "id": 23,
-        "name": "Land Rover Range Rover",
+        "name": "Range Rover",
         "make": "Land Rover",
         "year": 2022,
         "imgURL": "https://crdms.images.consumerreports.org/c_lfill,w_470,q_auto,f_auto/prod/cars/chrome/white/2021LRS020036_1280_01",
@@ -416,7 +416,7 @@ export default [
     },
     {
         "id": 24,
-        "name": "Aston Martin DB11",
+        "name": "DB11",
         "make": "Aston Martin",
         "year": 2023,
         "imgURL": "https://pictures.dealer.com/a/astonmartinofaustintx/0127/cf7b073b0d6faf1948b655ec2ce201cfx.jpg?impolicy=downsize&w=568",
@@ -434,7 +434,7 @@ export default [
     },
     {
         "id": 25,
-        "name": "Bentley Continental GT",
+        "name": "Continental GT",
         "make": "Bentley",
         "year": 2022,
         "imgURL": "https://vehicle-images.dealerinspire.com/7405-110007084/SCBCG2ZG6PC007728/7a297dfa27b35a394dc0135d24e833f9.jpg",
