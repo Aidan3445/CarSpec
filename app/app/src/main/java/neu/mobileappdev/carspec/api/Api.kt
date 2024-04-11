@@ -5,7 +5,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitClient {
-    private const val BASE_URL: String = "https://kgtttq6tg9.execute-api.us-east-2.amazonaws.com/api/"
+    private const val BASE_URL: String = "https://car-spec.adaptable.app/api/"
     const val CARS: String = "cars"
     const val SPECS: String = "specs"
 

@@ -1,5 +1,6 @@
 package neu.mobileappdev.carspec.api
 
+import android.util.Log
 import com.google.gson.JsonDeserializationContext
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
@@ -26,8 +27,14 @@ class CarDeserializer : JsonDeserializer<Car> {
         val name = jsonObject.get("name").asString
         val make = jsonObject.get("make").asString
         val year = jsonObject.get("year").asInt
-        val image = jsonObject.get("image").asString
+        val image = jsonObject.get("img").asString
 
         return Car(id, name, make, year, image)
     }
 }
+
+data class CarQuery(
+    val name: String? = null,
+    val make: String? = null,
+    val year: Int? = null,
+)

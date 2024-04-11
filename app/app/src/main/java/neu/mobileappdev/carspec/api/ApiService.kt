@@ -9,14 +9,14 @@ interface ApiService {
     // get 25 cars
     @GET(RetrofitClient.CARS)
     suspend fun getCars(
-        @Query("name") make: String = "",
-        @Query("make") model: String = "",
-        @Query("year") year: String = "",
+        @Query("name") name: String? = null,
+        @Query("make") make: String? = null,
+        @Query("year") year: Int? = null,
     ): Response<Set<Car>>
 
     // get the specs for a car from the id
     @GET(RetrofitClient.SPECS)
     suspend fun getSpecs(
-        @Path("id") id: String,
+        @Path("id") id: Int,
     ): Response<Specs>
 }

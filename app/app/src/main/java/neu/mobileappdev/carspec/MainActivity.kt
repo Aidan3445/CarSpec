@@ -28,6 +28,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import neu.mobileappdev.carspec.ui.home.Home
+import neu.mobileappdev.carspec.ui.home.HomeViewModel
 import neu.mobileappdev.carspec.ui.navigation.NavGraph
 import neu.mobileappdev.carspec.ui.navigation.NavMenu
 import neu.mobileappdev.carspec.ui.navigation.NavMenuViewModel
@@ -46,6 +47,7 @@ class MainActivity : ComponentActivity() {
     fun Content() {
         val navController = rememberNavController()
         val navMenuViewModel = NavMenuViewModel()
+        val homeViewModel = HomeViewModel()
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
@@ -73,6 +75,7 @@ class MainActivity : ComponentActivity() {
 
             // NavHost
             NavHost(
+                modifier = Modifier.weight(1f),
                 navController = navController,
                 startDestination = NavGraph.login,
 //                enterTransition = { Animations.enterRight },
@@ -81,14 +84,16 @@ class MainActivity : ComponentActivity() {
 //                popExitTransition = { Animations.exitRight },
             ) {
                 composable(NavGraph.login) {
-                    Text(text = "Login")
-                    Button(onClick = {
-                        navController.navigate(NavGraph.home)
-                    }) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceBetween,
+                    ) {
+                        Text(text = "Login")
+                        Button(onClick = { navController.navigate(NavGraph.home) }) {}
                     }
                 }
                 composable(NavGraph.home) {
-                    Home(navController)
+                    Home(navController, homeViewModel)
                 }
                 composable(NavGraph.favorites) {
                     Text(text = "Favorites")

@@ -12,12 +12,12 @@ data class Dimension(
 )
 
 class Specs(
-    val id: Int,
-    val engine: String,
-    val mileage: String,
-    val dimensions: Dimension,
-    val horsepower: Int,
-    val zeroToSixty: Double,
+    val id: Int = 0,
+    val engine: String = "ERROR",
+    val mileage: String = "ERROR",
+    val dimensions: Dimension = Dimension(-1.0, -1.0, -1.0),
+    val horsepower: Int = -1,
+    val zeroToSixty: Double = -1.0,
 )
 
 // deserializer to handle the different types of products

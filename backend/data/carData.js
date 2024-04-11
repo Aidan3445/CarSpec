@@ -73,7 +73,7 @@ export default [
     },
     {
         "id": 5,
-        "name": "BMW 3 Series",
+        "name": "3 Series",
         "make": "BMW",
         "year": 2019,
         "imgURL": "https://www.bmw.com/content/dam/bmw/common/all-models/3-series/sedan/2022/navigation/bmw-3-series-sedan-lci-phev-modelfinder.png",
