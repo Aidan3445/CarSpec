@@ -62,6 +62,24 @@ app.get("/api/cars", async (req, res) => {
     }
 });
 
+app.get("/api/cars/:id", async (req, res) => {
+    try {
+        // find the car with the id, use == to match string and number
+        var id = req.params.id;
+        var car = cars.find((car) => car.id == id);
+
+        // if the car is not found
+        if (!car) {
+            return res.status(404).json({ error: "Car not found" });
+        }
+
+        return res.json(car);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
 app.get("/api/specs/:id", async (req, res) => {
     try {
         // find the car with the id, use == to match string and number
@@ -74,6 +92,32 @@ app.get("/api/specs/:id", async (req, res) => {
         }
 
         return res.json({ id: car.id, ...car.specs });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+app.post("/api/login", async (req, res) => {
+    try {
+        // check if the username and password are correct
+        var username = req.body.username;
+        var password = req.body.password;
+
+        if (username === "admin" && password === "password") {
+            return res.json({ success: true });
+        } else {
+            return res.status(401).json({ error: "Invalid username or password" });
+        }
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Server error" });
+    }
+});
+
+app.get("/api/login/hint", async (_, res) => {
+    try {
+        return res.json({ hint: "Username: admin, password: Password" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" });

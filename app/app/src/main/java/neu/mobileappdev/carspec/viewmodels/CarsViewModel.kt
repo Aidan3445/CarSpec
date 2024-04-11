@@ -1,18 +1,16 @@
-package neu.mobileappdev.carspec.ui.home
+package neu.mobileappdev.carspec.ui.cars
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import neu.mobileappdev.carspec.api.Car
 import neu.mobileappdev.carspec.api.CarQuery
 import neu.mobileappdev.carspec.api.CarRepository
 
-class HomeViewModel(
+class CarsViewModel(
     private val repository: CarRepository = CarRepository(),
     application: Application = Application()
     ) : AndroidViewModel(application) {
@@ -26,11 +24,11 @@ class HomeViewModel(
     val cars get() = carData
 
     // fetch status
-    private val isFetchingData = MutableLiveData<Boolean>(false)
+    private val isFetchingData = MutableLiveData(false)
     val isFetching get() = isFetchingData
 
     // error message
-    private val errorMessageData = MutableLiveData<String>("")
+    private val errorMessageData = MutableLiveData("")
     val errorMessage get() = errorMessageData
 
     // model fetch call
