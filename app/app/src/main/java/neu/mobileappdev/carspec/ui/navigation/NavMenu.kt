@@ -9,12 +9,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material3.Tab
 import androidx.compose.material3.TabRow
-import androidx.compose.material3.TabRowDefaults.SecondaryIndicator
+import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -54,18 +53,19 @@ fun NavMenu(
                     .fillMaxWidth()
                     .background(Color.White),
             indicator = { tabPositions ->
+                if (tabIndex == -1) return@TabRow
                 val tabPosition = tabPositions[tabIndex]
-                SecondaryIndicator(
+                TabRowDefaults.SecondaryIndicator(
                     modifier =
-                        Modifier
-                            .tabIndicatorOffset(tabPosition)
-                            .fillMaxSize()
-                            .shadow(
-                                15.dp,
-                                ambientColor = colorResource(R.color.selected_tab),
-                                spotColor = colorResource(R.color.black),
-                                clip = false,
-                            ),
+                    Modifier
+                        .tabIndicatorOffset(tabPosition)
+                        .fillMaxSize()
+                        .shadow(
+                            15.dp,
+                            ambientColor = colorResource(R.color.selected_tab),
+                            spotColor = colorResource(R.color.black),
+                            clip = false,
+                        ),
                     color = colorResource(id = R.color.selected_tab),
                 )
             },
@@ -81,7 +81,9 @@ fun NavMenu(
                     selected = tabIndex == index,
                     selectedContentColor = Color.White,
                     onClick = {
+                        if (tabIndex == index) return@Tab
                         Log.d("NavMenu", "Tab index: page$index")
+                        viewModel.setPageIndex(index)
                         viewModel.setPageIndex(index)
                         navController.navigate("page$index")
                     },

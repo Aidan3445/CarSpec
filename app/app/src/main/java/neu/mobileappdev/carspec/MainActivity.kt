@@ -10,12 +10,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -23,15 +21,23 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import neu.mobileappdev.carspec.api.CarQuery
+import neu.mobileappdev.carspec.ui.car.Car
+import neu.mobileappdev.carspec.ui.favorites.Favorites
 import neu.mobileappdev.carspec.ui.home.Home
 import neu.mobileappdev.carspec.ui.home.HomeViewModel
+import neu.mobileappdev.carspec.ui.login.Login
+import neu.mobileappdev.carspec.ui.navigation.Animations
 import neu.mobileappdev.carspec.ui.navigation.NavGraph
 import neu.mobileappdev.carspec.ui.navigation.NavMenu
 import neu.mobileappdev.carspec.ui.navigation.NavMenuViewModel
+import neu.mobileappdev.carspec.ui.search.Search
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +53,7 @@ class MainActivity : ComponentActivity() {
     fun Content() {
         val navController = rememberNavController()
         val navMenuViewModel = NavMenuViewModel()
-        val homeViewModel = HomeViewModel()
+        val homeViewModel = HomeViewModel(query = CarQuery(year = 2023))
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
@@ -77,37 +83,71 @@ class MainActivity : ComponentActivity() {
             NavHost(
                 modifier = Modifier.weight(1f),
                 navController = navController,
-                startDestination = NavGraph.login,
-//                enterTransition = { Animations.enterRight },
-//                exitTransition = { Animations.exitLeft },
-//                popEnterTransition = { Animations.enterLeft },
-//                popExitTransition = { Animations.exitRight },
+                startDestination = NavGraph.LOGIN,
             ) {
-                composable(NavGraph.login) {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.SpaceBetween,
+                composable(
+                    NavGraph.LOGIN,
+                    exitTransition = { Animations.exitLeft },
                     ) {
-                        Text(text = "Login")
-                        Button(onClick = { navController.navigate(NavGraph.home) }) {}
-                    }
+                    Login(navController = navController)
                 }
-                composable(NavGraph.home) {
+                composable(
+                    NavGraph.HOME,
+                    enterTransition = {
+                        if (navController.previousBackStackEntry?.destination?.route == NavGraph.LOGIN)
+                            Animations.enterRight
+                        else
+                            Animations.enterLeft },
+                    exitTransition = { Animations.exitLeft },
+                    ) {
                     Home(navController, homeViewModel)
                 }
-                composable(NavGraph.favorites) {
-                    Text(text = "Favorites")
+                composable(
+                    NavGraph.FAVORITES,
+                    enterTransition = {
+                        if (navController.previousBackStackEntry?.destination?.route == NavGraph.HOME) {
+                            Animations.enterRight
+                        } else {
+                            Animations.enterLeft
+                        }
+                    },
+                    exitTransition = {
+                        if (navBackStackEntry?.destination?.route == NavGraph.HOME) {
+                            Animations.exitRight
+                        } else {
+                            Animations.exitLeft
+                        }
+                    }
+                    ) {
+                    Favorites()
                 }
-                composable(NavGraph.search) {
-                    Text(text = "Search")
+                composable(
+                    NavGraph.SEARCH,
+                    enterTransition = {
+                      if (navController.previousBackStackEntry?.destination?.route == NavGraph.CAR) {
+                          Animations.enterLeft
+                      } else {
+                          Animations.enterRight
+                      }
+                    },
+                    exitTransition = { Animations.exitRight },
+                    ) {
+                    Search()
                 }
-                composable(NavGraph.car) {
-                    Text(text = "Car")
+                composable(
+                    NavGraph.CAR,
+                    arguments = listOf(navArgument("carID") {type = NavType.IntType}),
+                    enterTransition = {
+                        navMenuViewModel.setPageIndex(-1)
+                        Animations.enterRight },
+                    exitTransition = { Animations.exitRight },
+                    ) {
+                    Car()
                 }
             }
 
             // Navigation menu
-            if (navBackStackEntry?.destination?.route != NavGraph.login) {
+            if (navBackStackEntry?.destination?.route != NavGraph.LOGIN) {
                 NavMenu(navController,  navMenuViewModel)
             }
         }

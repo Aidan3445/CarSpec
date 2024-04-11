@@ -7,25 +7,25 @@ import androidx.compose.animation.slideOutHorizontally
 object Animations {
     val enterRight =
         slideInHorizontally(
-            initialOffsetX = { fullWidth -> fullWidth },
-            animationSpec = tween(300),
+            initialOffsetX = { fullWidth ->  fullWidth },
+            animationSpec = tween(500),
         )
 
     val exitRight =
         slideOutHorizontally(
             targetOffsetX = { fullWidth -> fullWidth },
-            animationSpec = tween(300),
+            animationSpec = tween(500),
         )
 
     val enterLeft =
         slideInHorizontally(
             initialOffsetX = { fullWidth -> -fullWidth },
-            animationSpec = tween(300),
+            animationSpec = tween(500),
         )
 
     val exitLeft =
         slideOutHorizontally(
             targetOffsetX = { fullWidth -> -fullWidth },
-            animationSpec = tween(300),
+            animationSpec = tween(500),
         )
 }

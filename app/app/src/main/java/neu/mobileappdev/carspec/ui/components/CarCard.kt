@@ -42,7 +42,7 @@ fun CarCard(
                 .fillMaxWidth()
                 .clickable { onClick() }
                 .background(colorResource(id = R.color.purple_200))
-                .padding(10.dp, 0.dp, 20.dp, 0.dp),
+                .padding(10.dp, 0.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement =  Arrangement.SpaceBetween,
     ) {

@@ -1,8 +1,6 @@
 package neu.mobileappdev.carspec.api
 
-import android.util.Log
 import org.json.JSONObject
-import retrofit2.Response
 
 class CarRepository {
     class FetchException(message: String) : Exception(message)

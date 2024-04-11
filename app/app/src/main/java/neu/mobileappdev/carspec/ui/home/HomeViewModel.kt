@@ -1,27 +1,21 @@
-package neu.mobileappdev.carspec.ui.cars
+package neu.mobileappdev.carspec.ui.home
 
-import android.app.Application
 import android.util.Log
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import neu.mobileappdev.carspec.api.Car
 import neu.mobileappdev.carspec.api.CarQuery
 import neu.mobileappdev.carspec.api.CarRepository
 
-class CarsViewModel(
+class HomeViewModel(
     private val repository: CarRepository = CarRepository(),
-    application: Application = Application()
-    ) : AndroidViewModel(application) {
-
-    // query params that can be set in the search tab
-    private val queryData = MutableLiveData<CarQuery>(null)
-    val query get() = queryData
-
+    private var query: CarQuery = CarQuery()
+) : ViewModel() {
     // car data that is fetched from the API
-    private val carData = MutableLiveData<Set<Car>>(emptySet())
-    val cars get() = carData
+    private val carListData = MutableLiveData<Set<Car>>(emptySet())
+    val cars get() = carListData
 
     // fetch status
     private val isFetchingData = MutableLiveData(false)
@@ -38,7 +32,7 @@ class CarsViewModel(
         viewModelScope.launch {
             try {
                 // fetch cars from the API
-                val response = repository.fetchCars(queryData.value ?: CarQuery())
+                val response = repository.fetchCars(query)
 
                 Log.d("HomeViewModel", "fetchCars: $response")
 
@@ -47,7 +41,7 @@ class CarsViewModel(
                     throw CarRepository.FetchException("No cars available")
                 }
 
-                carData.postValue(response)
+                carListData.postValue(response)
                 errorMessageData.postValue("")
             } catch (e: CarRepository.FetchException) {
                 errorMessageData.postValue(e.message)
@@ -59,6 +53,14 @@ class CarsViewModel(
 
     // clear the query params
     fun clearQuery() {
-        queryData.postValue(CarQuery())
+        if (isFilterApplied()) {
+            query = CarQuery()
+            fetchCars()
+        }
+    }
+
+    // bool is filter applied
+    fun isFilterApplied(): Boolean {
+        return query != CarQuery()
     }
 }
