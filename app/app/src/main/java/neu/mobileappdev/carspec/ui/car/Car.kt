@@ -16,11 +16,11 @@ import androidx.navigation.compose.rememberNavController
 @Preview(showBackground = true)
 @Composable
 fun Car(
-    viewModel: CarViewModel = CarViewModel(),
     navController: NavController = rememberNavController(),
+    carID: Int = 1
 ) {
     Text(modifier = Modifier.fillMaxWidth().padding(20.dp),
-        text = "Car Name",
+        text = "Car Name $carID",
         textAlign = TextAlign.Center,
         fontSize = 30.sp,
         fontWeight = FontWeight.Bold)

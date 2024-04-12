@@ -51,6 +51,10 @@ class HomeViewModel(
         }
     }
 
+    fun setQuery(newQuery: CarQuery) {
+        query = newQuery
+    }
+
     // clear the query params
     fun clearQuery() {
         if (isFilterApplied()) {

@@ -1,5 +1,6 @@
 package neu.mobileappdev.carspec.ui.home
 
+import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,12 +31,16 @@ import neu.mobileappdev.carspec.ui.components.CarCard
 @Composable
 fun Home(
     navController: NavController = rememberNavController(),
-    viewModel: HomeViewModel = HomeViewModel(),
+    viewModel: HomeViewModel = HomeViewModel()
     ) {
+    // make view model
+
     // observe data
     val cars by viewModel.cars.observeAsState()
     val isFetching by viewModel.isFetching.observeAsState()
     val errorMessage by viewModel.errorMessage.observeAsState()
+
+    Log.d("Home", "Cars: $cars")
 
     // effect only once
     LaunchedEffect(Unit) {
@@ -51,7 +56,7 @@ fun Home(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(0.dp, 20.dp, 0.dp, 0.dp),
+                    .padding(0.dp, 20.dp),
                 text = stringResource(id = R.string.title_home),
                 textAlign = TextAlign.Center,
                 fontSize = 30.sp,
@@ -81,7 +86,7 @@ fun Home(
                 items(cars?.size ?: 0) { index ->
                     val car = cars!!.elementAt(index)
                     CarCard(car) {
-                        navController.navigate("car")
+                        navController.navigate("car/${car.id}")
                     }
                 }
             }
@@ -92,10 +97,6 @@ fun Home(
                 color = Color.Gray,
                 fontSize = 15.sp
             )
-
-            Button(onClick = { viewModel.clearQuery() }) {
-                Text("Clear Query")
-            }
         }
     }
 }

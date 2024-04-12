@@ -14,6 +14,12 @@ interface ApiService {
         @Query("year") year: Int? = null,
     ): Response<Set<Car>>
 
+    // get car by id
+    @GET(RetrofitClient.CARS)
+    suspend fun getCar(
+        @Path("id") id: Int,
+    ): Response<Car>
+
     // get the specs for a car from the id
     @GET(RetrofitClient.SPECS)
     suspend fun getSpecs(

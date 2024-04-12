@@ -53,7 +53,7 @@ class MainActivity : ComponentActivity() {
     fun Content() {
         val navController = rememberNavController()
         val navMenuViewModel = NavMenuViewModel()
-        val homeViewModel = HomeViewModel(query = CarQuery(year = 2023))
+        val homeViewModel = HomeViewModel()
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
@@ -93,6 +93,10 @@ class MainActivity : ComponentActivity() {
                 }
                 composable(
                     NavGraph.HOME,
+                    arguments = listOf(
+                        navArgument("name") {nullable = true; defaultValue = null; },
+                        navArgument("make") {nullable = true; defaultValue = null},
+                        navArgument("year") {nullable = true; defaultValue = null}),
                     enterTransition = {
                         if (navController.previousBackStackEntry?.destination?.route == NavGraph.LOGIN)
                             Animations.enterRight
@@ -100,6 +104,11 @@ class MainActivity : ComponentActivity() {
                             Animations.enterLeft },
                     exitTransition = { Animations.exitLeft },
                     ) {
+                    val name = it.arguments?.getString("name")
+                    val make = it.arguments?.getString("make")
+                    val year = it.arguments?.getInt("year")
+
+                    homeViewModel.setQuery(CarQuery(name, make, year))
                     Home(navController, homeViewModel)
                 }
                 composable(
@@ -132,7 +141,7 @@ class MainActivity : ComponentActivity() {
                     },
                     exitTransition = { Animations.exitRight },
                     ) {
-                    Search()
+                    Search(navController)
                 }
                 composable(
                     NavGraph.CAR,
@@ -142,7 +151,7 @@ class MainActivity : ComponentActivity() {
                         Animations.enterRight },
                     exitTransition = { Animations.exitRight },
                     ) {
-                    Car()
+                    Car(navController,it.arguments?.getInt("carID") ?: 0)
                 }
             }
 

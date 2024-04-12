@@ -18,9 +18,10 @@ import neu.mobileappdev.carspec.R
 @Preview(showBackground = true)
 @Composable
 fun Favorites(
-    viewModel: FavoritesViewModel = FavoritesViewModel(),
     navController: NavController = rememberNavController(),
 ) {
+    val viewModel: FavoritesViewModel = FavoritesViewModel()
+
     Text(modifier = Modifier.fillMaxWidth().padding(20.dp),
         text = stringResource(id = R.string.title_favorites),
         textAlign = TextAlign.Center,

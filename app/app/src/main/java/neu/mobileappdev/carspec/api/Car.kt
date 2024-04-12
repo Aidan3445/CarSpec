@@ -6,11 +6,11 @@ import com.google.gson.JsonElement
 import java.lang.reflect.Type
 
 data class Car(
-    val id: Int,
-    val name: String,
-    val make: String,
-    val year: Int,
-    val image: String,
+    val id: Int = 0,
+    val name: String = "Car Name",
+    val make: String = "Car Make",
+    val year: Int = 9999,
+    val image: String = "https://via.placeholder.com/150"
 )
 
 // deserializer to handle the different types of products

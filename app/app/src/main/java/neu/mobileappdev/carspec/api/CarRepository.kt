@@ -28,6 +28,29 @@ class CarRepository {
         }
     }
 
+    // fetch a car from ID
+    suspend fun fetchCar(id: Int): Car {
+        val response = Api.apiService.getCar(id)
+
+        // handle response
+        if (response.isSuccessful) {
+            return response.body() ?: Car()
+        } else {
+            val errorObj = response.errorBody()?.string()
+            // get error message
+            val err =
+                try {
+                    val json = errorObj?.let { JSONObject(it) }
+                    json?.getString("message")
+                } catch (e: Exception) {
+                    e.message
+                }
+
+            // throw custom error type for better handling
+            throw FetchException(err ?: "Unknown error")
+        }
+    }
+
     // fetch specs for a car from ID
     suspend fun fetchSpecs(id: Int): Specs {
         val response = Api.apiService.getSpecs(id)

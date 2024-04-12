@@ -23,9 +23,10 @@ import neu.mobileappdev.carspec.ui.navigation.NavGraph
 @Preview(showBackground = true)
 @Composable
 fun Login(
-    viewModel: LoginViewModel = LoginViewModel(),
     navController: NavController = rememberNavController(),
 ) {
+    val viewModel: LoginViewModel = LoginViewModel()
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween,
