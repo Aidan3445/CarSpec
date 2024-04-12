@@ -1,13 +1,53 @@
 package neu.mobileappdev.carspec.ui.login
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import neu.mobileappdev.carspec.api.ApiService
+import neu.mobileappdev.carspec.api.LoginRepository
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+    private val repository: LoginRepository = LoginRepository(),
+) : ViewModel() {
+    // login event handler
+    private val loginSuccessEvent = MutableLiveData<Unit>()
+    val loginSuccess get() = loginSuccessEvent
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+    // error handler
+    private val messageData = MutableLiveData<String>()
+    val message get() = messageData
+
+    // login function
+    fun tryLogin(
+        username: String,
+        password: String,
+    ) {
+        Log.d("LoginViewModel", "tryLogin: $username, $password")
+        viewModelScope.launch {
+            try {
+                if (repository.login(username, password)) {
+                    loginSuccessEvent.postValue(Unit)
+                } else {
+                    messageData.value = "Invalid username or password\nPlease Try Again"
+                }
+            } catch (e: ApiService.FetchException) {
+                messageData.value = e.message
+            } catch (e: Exception) {
+                messageData.value = "An error occurred while trying to login\nPlease Try Again"
+            }
+        }
     }
-    val text: LiveData<String> = _text
+
+    // get login hint
+    fun getHint() {
+        viewModelScope.launch {
+            messageData.value = repository.getHint()
+        }
+    }
+
+    fun clearErrorMessage() {
+        messageData.value = ""
+    }
 }

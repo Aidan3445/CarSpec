@@ -8,11 +8,14 @@ object RetrofitClient {
     private const val BASE_URL: String = "https://car-spec.adaptable.app/api/"
     const val CARS: String = "cars"
     const val SPECS: String = "specs"
+    const val LOGIN: String = "login"
+    const val HINT: String = "login/hint"
 
     private val gson =
         GsonBuilder()
             .registerTypeAdapter(Car::class.java, CarDeserializer())
             .registerTypeAdapter(Specs::class.java, SpecsDeserializer())
+            .registerTypeAdapter(LoginResponse::class.java, LoginResponseDeserializer())
             .create()
 
     val retrofit: Retrofit by lazy {

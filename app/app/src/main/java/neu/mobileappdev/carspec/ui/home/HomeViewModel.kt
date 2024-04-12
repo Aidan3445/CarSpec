@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import neu.mobileappdev.carspec.api.ApiService
 import neu.mobileappdev.carspec.api.Car
 import neu.mobileappdev.carspec.api.CarQuery
 import neu.mobileappdev.carspec.api.CarRepository
@@ -40,12 +41,12 @@ class HomeViewModel(
 
                 // handle empty data message
                 if (response.isEmpty()) {
-                    throw CarRepository.FetchException("No cars available")
+                    throw ApiService.FetchException("No cars available")
                 }
 
                 carListData.postValue(response)
                 errorMessageData.postValue("")
-            } catch (e: CarRepository.FetchException) {
+            } catch (e: ApiService.FetchException) {
                 Log.d("HomeViewModel", "fetchCars: ${e.message}")
                 errorMessageData.postValue(e.message)
             } catch (e: Exception) {

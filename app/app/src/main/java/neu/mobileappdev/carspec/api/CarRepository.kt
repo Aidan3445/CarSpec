@@ -3,8 +3,6 @@ package neu.mobileappdev.carspec.api
 import org.json.JSONObject
 
 class CarRepository {
-    class FetchException(message: String) : Exception(message)
-
     // fetch cars from api
     suspend fun fetchCars(query: CarQuery): Set<Car> {
         val response = Api.apiService.getCars(query.name, query.make, query.year)
@@ -18,13 +16,13 @@ class CarRepository {
             val err =
                 try {
                     val json = errorObj?.let { JSONObject(it) }
-                    json?.getString("message")
+                    json?.getString("error")
                 } catch (e: Exception) {
                     e.message
                 }
 
             // throw custom error type for better handling
-            throw FetchException(err ?: "Unknown error")
+            throw ApiService.FetchException(err ?: "Unknown error")
         }
     }
 
@@ -41,13 +39,13 @@ class CarRepository {
             val err =
                 try {
                     val json = errorObj?.let { JSONObject(it) }
-                    json?.getString("message")
+                    json?.getString("error")
                 } catch (e: Exception) {
                     e.message
                 }
 
             // throw custom error type for better handling
-            throw FetchException(err ?: "Unknown error")
+            throw ApiService.FetchException(err ?: "Unknown error")
         }
     }
 
@@ -70,7 +68,7 @@ class CarRepository {
                 }
 
             // throw custom error type for better handling
-            throw FetchException(err ?: "Unknown error")
+            throw ApiService.FetchException(err ?: "Unknown error")
         }
     }
 

@@ -117,7 +117,7 @@ app.get("/api/login", async (req, res) => {
 
 app.get("/api/login/hint", async (_, res) => {
     try {
-        return res.json({ hint: "Username: admin, password: Password" });
+        return res.json({ hint: "Username: admin\nPassword: password" });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" });
