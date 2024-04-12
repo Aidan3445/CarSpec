@@ -36,21 +36,23 @@ fun Search(
     val route = viewModel.route.observeAsState()
 
     // search fields
-    var name by remember { mutableStateOf("")}
-    var make by remember { mutableStateOf("")}
-    var year by remember { mutableStateOf("")}
+    var name by remember { mutableStateOf("") }
+    var make by remember { mutableStateOf("") }
+    var year by remember { mutableStateOf("") }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // screen title
-        Text(modifier = Modifier
-            .fillMaxWidth()
-            .padding(20.dp),
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(20.dp),
             text = stringResource(id = R.string.title_search),
             textAlign = TextAlign.Center,
             fontSize = 30.sp,
-            fontWeight = FontWeight.Bold)
+            fontWeight = FontWeight.Bold
+        )
 
         // search inputs
         Column(

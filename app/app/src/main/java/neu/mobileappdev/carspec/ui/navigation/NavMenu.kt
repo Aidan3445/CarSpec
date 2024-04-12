@@ -37,21 +37,21 @@ val navIcons =
 fun NavMenu(
     navController: NavController = rememberNavController(),
     viewModel: NavMenuViewModel = NavMenuViewModel(),
-    ) {
+) {
     val tabIndex by viewModel.pageIndex.observeAsState(0)
 
     Column(
         modifier =
-            Modifier
-                .requiredHeight(50.dp)
-                .shadow(15.dp, spotColor = Color.Black, clip = false),
+        Modifier
+            .requiredHeight(50.dp)
+            .shadow(15.dp, spotColor = Color.Black, clip = false),
     ) {
         TabRow(
             tabIndex,
             modifier =
-                Modifier
-                    .fillMaxWidth()
-                    .background(Color.White),
+            Modifier
+                .fillMaxWidth()
+                .background(Color.White),
             indicator = { tabPositions ->
                 if (tabIndex == -1) return@TabRow
                 val tabPosition = tabPositions[tabIndex]

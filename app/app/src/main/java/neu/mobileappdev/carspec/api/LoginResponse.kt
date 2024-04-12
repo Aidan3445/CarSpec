@@ -18,7 +18,8 @@ class LoginResponseDeserializer : JsonDeserializer<LoginResponse> {
         typeOfT: Type?,
         context: JsonDeserializationContext?,
     ): LoginResponse {
-        val jsonObject = json?.asJsonObject ?: throw IllegalArgumentException("Invalid product JSON")
+        val jsonObject =
+            json?.asJsonObject ?: throw IllegalArgumentException("Invalid product JSON")
 
         Log.d("LoginResponseDeserializer", "deserialize: $jsonObject")
 

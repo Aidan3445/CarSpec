@@ -1,16 +1,13 @@
 package neu.mobileappdev.carspec.ui.car
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 
-class CarViewModel(
-    application: Application = Application()
-) : AndroidViewModel(application) {
+class CarViewModel(private val carID: Int) : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is home Fragment"
+        value = "This is Car Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -1,6 +1,5 @@
 package neu.mobileappdev.carspec.ui.login
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,7 +15,7 @@ class LoginViewModel(
     val loginSuccess get() = loginSuccessEvent
 
     // error handler
-    private val messageData = MutableLiveData<String>()
+    private val messageData = MutableLiveData<String?>()
     val message get() = messageData
 
     // login function
@@ -24,7 +23,6 @@ class LoginViewModel(
         username: String,
         password: String,
     ) {
-        Log.d("LoginViewModel", "tryLogin: $username, $password")
         viewModelScope.launch {
             try {
                 if (repository.login(username, password)) {
@@ -48,6 +46,6 @@ class LoginViewModel(
     }
 
     fun clearErrorMessage() {
-        messageData.value = ""
+        messageData.value = null
     }
 }

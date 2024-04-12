@@ -91,7 +91,7 @@ class MainActivity : ComponentActivity() {
                 composable(
                     NavGraph.LOGIN,
                     exitTransition = { Animations.exitLeft },
-                    ) {
+                ) {
                     Login(navController = navController)
                 }
 
@@ -100,9 +100,9 @@ class MainActivity : ComponentActivity() {
                     NavGraph.HOME,
                     // arguments to apply query filter
                     arguments = listOf(
-                        navArgument("name") {nullable = true; type = NavType.StringType},
-                        navArgument("make") {nullable = true; type = NavType.StringType},
-                        navArgument("year") {nullable = true; type = NavType.StringType}),
+                        navArgument("name") { nullable = true; type = NavType.StringType },
+                        navArgument("make") { nullable = true; type = NavType.StringType },
+                        navArgument("year") { nullable = true; type = NavType.StringType }),
                     enterTransition = {
                         // reset page index for nav menu
                         navMenuViewModel.setPageIndex(0)
@@ -111,9 +111,10 @@ class MainActivity : ComponentActivity() {
                         if (navController.previousBackStackEntry?.destination?.route == NavGraph.LOGIN)
                             Animations.enterRight
                         else
-                            Animations.enterLeft },
+                            Animations.enterLeft
+                    },
                     exitTransition = { Animations.exitLeft },
-                    ) {
+                ) {
                     val name = it.arguments?.getString("name")
                     val make = it.arguments?.getString("make")
                     val year = it.arguments?.getString("year")
@@ -144,7 +145,7 @@ class MainActivity : ComponentActivity() {
                             Animations.exitLeft
                         }
                     }
-                    ) {
+                ) {
                     Favorites(navController, FavoritesViewModel())
                 }
 
@@ -163,7 +164,7 @@ class MainActivity : ComponentActivity() {
                         }
                     },
                     exitTransition = { Animations.exitRight },
-                    ) {
+                ) {
                     Search(navController, SearchViewModel())
                 }
 
@@ -171,19 +172,20 @@ class MainActivity : ComponentActivity() {
                 composable(
                     NavGraph.CAR,
                     // arguments to pass car ID
-                    arguments = listOf(navArgument("carID") {type = NavType.IntType}),
+                    arguments = listOf(navArgument("carID") { type = NavType.IntType }),
                     enterTransition = {
                         navMenuViewModel.setPageIndex(-1)
-                        Animations.enterRight },
+                        Animations.enterRight
+                    },
                     exitTransition = { Animations.exitRight },
-                    ) {
-                    Car(navController,it.arguments?.getInt("carID") ?: -1)
+                ) {
+                    Car(navController, it.arguments?.getInt("carID") ?: -1)
                 }
             }
 
             // Navigation menu
             if (navBackStackEntry?.destination?.route != NavGraph.LOGIN) {
-                NavMenu(navController,  navMenuViewModel)
+                NavMenu(navController, navMenuViewModel)
             }
         }
     }

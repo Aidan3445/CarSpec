@@ -32,7 +32,7 @@ import neu.mobileappdev.carspec.ui.components.CarCard
 fun Home(
     navController: NavController = rememberNavController(),
     viewModel: HomeViewModel = HomeViewModel()
-    ) {
+) {
     // make view model
 
     // observe data
@@ -48,7 +48,7 @@ fun Home(
         viewModel.fetchCars()
     }
 
-    Column (
+    Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {

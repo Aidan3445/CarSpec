@@ -3,9 +3,9 @@ package neu.mobileappdev.carspec.api
 import android.util.Log
 import org.json.JSONObject
 
-class LoginRepository {
+open class LoginRepository {
     // try login
-    suspend fun login(username: String, password: String): Boolean {
+    open suspend fun login(username: String, password: String): Boolean {
         Log.d("LoginRepository", "R: $username, $password")
 
         val response = Api.apiService.login(username, password)
@@ -35,7 +35,7 @@ class LoginRepository {
     }
 
     // get login hint
-    suspend fun getHint(): String {
+    open suspend fun getHint(): String {
         val response = Api.apiService.getHint()
 
         // handle response

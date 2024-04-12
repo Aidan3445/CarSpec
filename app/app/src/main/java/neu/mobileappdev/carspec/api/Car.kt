@@ -20,7 +20,8 @@ class CarDeserializer : JsonDeserializer<Car> {
         typeOfT: Type?,
         context: JsonDeserializationContext?,
     ): Car {
-        val jsonObject = json?.asJsonObject ?: throw IllegalArgumentException("Invalid product JSON")
+        val jsonObject =
+            json?.asJsonObject ?: throw IllegalArgumentException("Invalid product JSON")
 
         val id = jsonObject.get("id").asInt
         val name = jsonObject.get("name").asString

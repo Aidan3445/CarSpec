@@ -22,9 +22,13 @@ fun Favorites(
     viewModel: FavoritesViewModel = FavoritesViewModel()
 ) {
 
-    Text(modifier = Modifier.fillMaxWidth().padding(20.dp),
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp),
         text = stringResource(id = R.string.title_favorites),
         textAlign = TextAlign.Center,
         fontSize = 30.sp,
-        fontWeight = FontWeight.Bold)
+        fontWeight = FontWeight.Bold
+    )
 }

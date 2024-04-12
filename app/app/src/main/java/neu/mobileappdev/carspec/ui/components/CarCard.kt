@@ -38,23 +38,27 @@ fun CarCard(
 ) {
     Row(
         modifier =
-            Modifier
-                .requiredHeight(100.dp)
-                .fillMaxWidth()
-                .clickable { onClick() }
-                .background(colorResource(id =
-                    if (index % 2 == 0) R.color.purple_200 else R.color.purple_250))
-                .padding(10.dp, 0.dp),
+        Modifier
+            .requiredHeight(100.dp)
+            .fillMaxWidth()
+            .clickable { onClick() }
+            .background(
+                colorResource(
+                    id =
+                    if (index % 2 == 0) R.color.purple_200 else R.color.purple_250
+                )
+            )
+            .padding(10.dp, 0.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement =  Arrangement.SpaceBetween,
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         // car image
         Box(
             modifier =
-                Modifier
-                    .requiredHeight(80.dp)
-                    .requiredWidth(80.dp)
-                    .background(colorResource(id = R.color.purple_500)),
+            Modifier
+                .requiredHeight(80.dp)
+                .requiredWidth(80.dp)
+                .background(colorResource(id = R.color.purple_500)),
         ) {
             // TODO add image
         }
@@ -64,6 +68,9 @@ fun CarCard(
             text = "${car.year} ${car.make} ${car.name}",
             fontSize = 25.sp,
             textAlign = TextAlign.Center,
-            modifier = Modifier.padding(25.dp, 0.dp, 10.dp, 0.dp).fillMaxWidth())
+            modifier = Modifier
+                .padding(25.dp, 0.dp, 10.dp, 0.dp)
+                .fillMaxWidth()
+        )
     }
 }

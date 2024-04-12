@@ -27,7 +27,8 @@ class SpecsDeserializer : JsonDeserializer<Specs> {
         typeOfT: Type?,
         context: JsonDeserializationContext?,
     ): Specs {
-        val jsonObject = json?.asJsonObject ?: throw IllegalArgumentException("Invalid product JSON")
+        val jsonObject =
+            json?.asJsonObject ?: throw IllegalArgumentException("Invalid product JSON")
 
         val id = jsonObject.get("id").asInt
         val engine = jsonObject.get("engine").asString

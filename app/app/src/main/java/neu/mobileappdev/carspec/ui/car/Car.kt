@@ -12,6 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import neu.mobileappdev.carspec.ui.components.SpecsPopup
 
 @Preview(showBackground = true)
 @Composable
@@ -19,9 +20,17 @@ fun Car(
     navController: NavController = rememberNavController(),
     carID: Int = 1
 ) {
-    Text(modifier = Modifier.fillMaxWidth().padding(20.dp),
+    val viewModel = CarViewModel(carID)
+
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(20.dp),
         text = "Car Name $carID",
         textAlign = TextAlign.Center,
         fontSize = 30.sp,
-        fontWeight = FontWeight.Bold)
+        fontWeight = FontWeight.Bold
+    )
+
+    SpecsPopup()
 }

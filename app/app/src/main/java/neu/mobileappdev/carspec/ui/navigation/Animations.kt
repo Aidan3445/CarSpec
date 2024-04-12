@@ -7,7 +7,7 @@ import androidx.compose.animation.slideOutHorizontally
 object Animations {
     val enterRight =
         slideInHorizontally(
-            initialOffsetX = { fullWidth ->  fullWidth },
+            initialOffsetX = { fullWidth -> fullWidth },
             animationSpec = tween(500),
         )
 
