@@ -16,6 +16,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -56,7 +57,8 @@ fun Home(
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(0.dp, 20.dp, 0.dp, 10.dp),
+                    .padding(0.dp, 20.dp, 0.dp, 10.dp)
+                    .testTag("homeTitle"),
                 text = stringResource(id = R.string.title_home),
                 textAlign = TextAlign.Center,
                 fontSize = 30.sp,
@@ -67,7 +69,8 @@ fun Home(
                 Button(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(50.dp, 0.dp),
+                        .padding(50.dp, 0.dp)
+                        .testTag("clearFilterButton"),
                     onClick = { viewModel.clearQuery() }
                 ) {
                     Text("Clear Filter")
@@ -82,7 +85,9 @@ fun Home(
             )
         } else if (errorMessage.isNullOrEmpty()) {
             // show car list
-            LazyColumn {
+            LazyColumn(
+                modifier = Modifier.testTag("carList")
+            ) {
                 items(cars?.size ?: 0) { index ->
                     val car = cars!!.elementAt(index)
                     CarCard(car, index) {
@@ -95,7 +100,8 @@ fun Home(
             Text(
                 text = errorMessage!!,
                 color = Color.Gray,
-                fontSize = 15.sp
+                fontSize = 15.sp,
+                modifier = Modifier.padding(20.dp).testTag("errorMessage")
             )
         }
     }

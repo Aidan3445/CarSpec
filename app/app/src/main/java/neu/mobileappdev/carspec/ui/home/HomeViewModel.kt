@@ -1,6 +1,5 @@
 package neu.mobileappdev.carspec.ui.home
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -32,12 +31,8 @@ class HomeViewModel(
         // fetch cars from the API
         viewModelScope.launch {
             try {
-                Log.d("HomeViewModel", "fetchCars: $query")
-
                 // fetch cars from the API
                 val response = repository.fetchCars(query)
-
-                Log.d("HomeViewModel", "fetchCars: $response")
 
                 // handle empty data message
                 if (response.isEmpty()) {
@@ -47,10 +42,8 @@ class HomeViewModel(
                 carListData.postValue(response)
                 errorMessageData.postValue("")
             } catch (e: ApiService.FetchException) {
-                Log.d("HomeViewModel", "fetchCars: ${e.message}")
                 errorMessageData.postValue(e.message)
             } catch (e: Exception) {
-                Log.d("HomeViewModel", "fetchCars: ${e.message}")
                 errorMessageData.postValue("An error occurred while fetching data")
             } finally {
                 isFetchingData.postValue(false)

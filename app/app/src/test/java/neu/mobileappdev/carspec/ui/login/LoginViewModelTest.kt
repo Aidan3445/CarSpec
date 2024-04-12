@@ -12,6 +12,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import java.util.UUID
 
 class LoginViewModelTest {
     // Required to test LiveData
@@ -58,8 +59,16 @@ class LoginViewModelTest {
         // randomize partially incorrect credentials
         val rand = (0..2).random()
         // given
-        val username = "admin" + if (rand == 0 || rand == 2) "NOT" else ""
-        val password = "password" + if (rand == 1 || rand == 2) "NOT" else ""
+        val username = if (rand == 0 || rand == 2) {
+            UUID.randomUUID().toString()
+        } else {
+            "admin"
+        }
+        val password = if (rand == 1 || rand == 2) {
+            UUID.randomUUID().toString()
+        } else {
+            "password"
+        }
 
         // preconditions
         assertEquals(null, viewModel.message.value)
@@ -76,23 +85,41 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun testFetchException() = runTest {
+    fun testCarsFetchException() = runTest {
         // given
-        val username = "throw"
-        val password = "exception"
+        viewModel = LoginViewModel(FetchExceptionRepo())
 
         // preconditions
         assertEquals(null, viewModel.message.value)
         assertEquals(null, viewModel.loginSuccess.value)
 
         // when
-        viewModel.tryLogin(username, password)
+        viewModel.tryLogin(UUID.randomUUID().toString(), UUID.randomUUID().toString())
 
         // then
         viewModel.loginSuccess.observeForever {
             assert(false)
         }
         assertEquals("fetch exception", viewModel.message.value)
+    }
+
+    @Test
+    fun testCarOtherException() = runTest {
+        // given
+        viewModel = LoginViewModel(OtherExceptionRepo())
+
+        // preconditions
+        assertEquals(null, viewModel.message.value)
+        assertEquals(null, viewModel.loginSuccess.value)
+
+        // when
+        viewModel.tryLogin(UUID.randomUUID().toString(), UUID.randomUUID().toString())
+
+        // then
+        viewModel.loginSuccess.observeForever {
+            assert(false)
+        }
+        assertEquals("An error occurred while trying to login\nPlease Try Again", viewModel.message.value)
     }
 
     @Test
@@ -108,12 +135,12 @@ class LoginViewModelTest {
     }
 
     @Test
-    fun testClearErrorMessage() = runTest {
+    fun testClearMessage() = runTest {
         // given
-        viewModel.message.value = "error message"
+        viewModel.message.value = "message"
 
         // preconditions
-        assertEquals("error message", viewModel.message.value)
+        assertEquals("message", viewModel.message.value)
 
         // when
         viewModel.clearErrorMessage()
@@ -121,20 +148,26 @@ class LoginViewModelTest {
         // then
         assertEquals(null, viewModel.message.value)
     }
-
 }
 
-class FakeRepo() : LoginRepository() {
+open class FakeRepo() : LoginRepository() {
     override suspend fun login(username: String, password: String): Boolean {
-        // simulate fetch exception for testing
-        if (username == "throw" && password == "exception") {
-            throw ApiService.FetchException("fetch exception")
-        }
-
         return username == "admin" && password == "password"
     }
 
     override suspend fun getHint(): String {
         return "password hint"
+    }
+}
+
+class FetchExceptionRepo() : FakeRepo() {
+    override suspend fun login(username: String, password: String): Boolean {
+        throw ApiService.FetchException("fetch exception")
+    }
+}
+
+class OtherExceptionRepo() : FakeRepo() {
+    override suspend fun login(username: String, password: String): Boolean {
+        throw Exception("other exception")
     }
 }

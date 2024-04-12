@@ -2,10 +2,12 @@ package neu.mobileappdev.carspec.api
 
 import org.json.JSONObject
 
-class CarRepository {
+open class CarRepository(
+    private val apiService: ApiService = Api.apiService
+){
     // fetch cars from api
-    suspend fun fetchCars(query: CarQuery): Set<Car> {
-        val response = Api.apiService.getCars(query.name, query.make, query.year)
+    open suspend fun fetchCars(query: CarQuery): Set<Car> {
+        val response = apiService.getCars(query.name, query.make, query.year)
 
         // handle response
         if (response.isSuccessful) {
@@ -27,8 +29,8 @@ class CarRepository {
     }
 
     // fetch a car from ID
-    suspend fun fetchCar(id: Int): Car {
-        val response = Api.apiService.getCar(id)
+    open suspend fun fetchCar(id: Int): Car {
+        val response = apiService.getCar(id)
 
         // handle response
         if (response.isSuccessful) {
@@ -50,9 +52,8 @@ class CarRepository {
     }
 
     // fetch specs for a car from ID
-    suspend fun fetchSpecs(id: Int): Specs {
-        val response = Api.apiService.getSpecs(id)
-
+    open suspend fun fetchSpecs(id: Int): Specs {
+        val response = apiService.getSpecs(id)
         // handle response
         if (response.isSuccessful) {
             return response.body() ?: Specs()
@@ -62,7 +63,7 @@ class CarRepository {
             val err =
                 try {
                     val json = errorObj?.let { JSONObject(it) }
-                    json?.getString("message")
+                    json?.getString("error")
                 } catch (e: Exception) {
                     e.message
                 }

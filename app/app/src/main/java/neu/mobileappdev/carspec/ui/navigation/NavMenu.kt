@@ -17,6 +17,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -72,6 +73,7 @@ fun NavMenu(
         ) {
             navIcons.forEachIndexed { index, resource ->
                 Tab(
+                    modifier = Modifier.testTag("tab$index"),
                     icon = {
                         Image(
                             painter = painterResource(id = resource),

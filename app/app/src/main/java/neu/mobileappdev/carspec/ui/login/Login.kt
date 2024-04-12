@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,8 +32,8 @@ import neu.mobileappdev.carspec.ui.navigation.NavGraph
 @Preview(showBackground = true)
 @Composable
 fun Login(
-    viewModel: LoginViewModel = LoginViewModel(),
     navController: NavController = rememberNavController(),
+    viewModel: LoginViewModel = LoginViewModel(),
 ) {
     // get error and success updates from the view model
     val errorMessage by viewModel.message.observeAsState()
@@ -42,7 +43,7 @@ fun Login(
     val state = remember { SnackbarHostState() }
     SnackbarHost(
         hostState = remember { state },
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().testTag("snackbarHost"),
     )
 
     // use column to stack the username, password, and login button
@@ -58,14 +59,16 @@ fun Login(
         var username by remember { mutableStateOf("") }
         var password by remember { mutableStateOf("") }
 
-        Column {
+        Column(
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
             // username field
             TextField(
                 singleLine = true,
                 value = username,
                 onValueChange = { username = it },
                 label = { Text("Username") },
-                modifier = Modifier.padding(bottom = 10.dp),
+                modifier = Modifier.testTag("usernameField"),
             )
 
             // password field
@@ -74,15 +77,14 @@ fun Login(
                 value = password,
                 onValueChange = { password = it },
                 label = { Text("Password") },
+                modifier = Modifier.testTag("passwordField"),
             )
 
             // forgot login hint
             Text(
                 text = "Forgot login? Click for a hint.",
                 textDecoration = TextDecoration.Underline,
-                modifier = Modifier
-                    .padding(top = 10.dp)
-                    .clickable { viewModel.getHint() },
+                modifier = Modifier.clickable { viewModel.getHint() }.testTag("hintLink"),
             )
         }
 
@@ -92,7 +94,7 @@ fun Login(
                 Log.d("LoginButton", "B: $username, $password")
                 viewModel.tryLogin(username, password)
             },
-            modifier = Modifier.fillMaxWidth(.9f),
+            modifier = Modifier.fillMaxWidth(.9f).testTag("loginButton"),
         ) {
             Text(text = "Login")
         }
