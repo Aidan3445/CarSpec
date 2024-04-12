@@ -33,6 +33,7 @@ fun CarCard(
             2021,
             "https://www.cars.com/i/large/in/v2/stock_photos/a1bd413b-0726-49b1-929b-53f83760953a/3f618153-c2c3-41e2-9684-5493885a6d53.png",
         ),
+    index: Int = 0,
     onClick: () -> Unit = { Log.d("CarCard", "onClick") },
 ) {
     Row(
@@ -41,7 +42,8 @@ fun CarCard(
                 .requiredHeight(100.dp)
                 .fillMaxWidth()
                 .clickable { onClick() }
-                .background(colorResource(id = R.color.purple_200))
+                .background(colorResource(id =
+                    if (index % 2 == 0) R.color.purple_200 else R.color.purple_250))
                 .padding(10.dp, 0.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement =  Arrangement.SpaceBetween,

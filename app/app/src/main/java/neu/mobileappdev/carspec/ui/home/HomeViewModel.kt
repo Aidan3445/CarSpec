@@ -31,6 +31,8 @@ class HomeViewModel(
         // fetch cars from the API
         viewModelScope.launch {
             try {
+                Log.d("HomeViewModel", "fetchCars: $query")
+
                 // fetch cars from the API
                 val response = repository.fetchCars(query)
 
@@ -44,7 +46,11 @@ class HomeViewModel(
                 carListData.postValue(response)
                 errorMessageData.postValue("")
             } catch (e: CarRepository.FetchException) {
+                Log.d("HomeViewModel", "fetchCars: ${e.message}")
                 errorMessageData.postValue(e.message)
+            } catch (e: Exception) {
+                Log.d("HomeViewModel", "fetchCars: ${e.message}")
+                errorMessageData.postValue("An error occurred while fetching data")
             } finally {
                 isFetchingData.postValue(false)
             }

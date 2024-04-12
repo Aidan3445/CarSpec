@@ -30,6 +30,7 @@ import androidx.navigation.navArgument
 import neu.mobileappdev.carspec.api.CarQuery
 import neu.mobileappdev.carspec.ui.car.Car
 import neu.mobileappdev.carspec.ui.favorites.Favorites
+import neu.mobileappdev.carspec.ui.favorites.FavoritesViewModel
 import neu.mobileappdev.carspec.ui.home.Home
 import neu.mobileappdev.carspec.ui.home.HomeViewModel
 import neu.mobileappdev.carspec.ui.login.Login
@@ -38,6 +39,7 @@ import neu.mobileappdev.carspec.ui.navigation.NavGraph
 import neu.mobileappdev.carspec.ui.navigation.NavMenu
 import neu.mobileappdev.carspec.ui.navigation.NavMenuViewModel
 import neu.mobileappdev.carspec.ui.search.Search
+import neu.mobileappdev.carspec.ui.search.SearchViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,19 +87,27 @@ class MainActivity : ComponentActivity() {
                 navController = navController,
                 startDestination = NavGraph.LOGIN,
             ) {
+                // login screen (default/start)
                 composable(
                     NavGraph.LOGIN,
                     exitTransition = { Animations.exitLeft },
                     ) {
                     Login(navController = navController)
                 }
+
+                // home screen
                 composable(
                     NavGraph.HOME,
+                    // arguments to apply query filter
                     arguments = listOf(
-                        navArgument("name") {nullable = true; defaultValue = null; },
-                        navArgument("make") {nullable = true; defaultValue = null},
-                        navArgument("year") {nullable = true; defaultValue = null}),
+                        navArgument("name") {nullable = true; type = NavType.StringType},
+                        navArgument("make") {nullable = true; type = NavType.StringType},
+                        navArgument("year") {nullable = true; type = NavType.StringType}),
                     enterTransition = {
+                        // reset page index for nav menu
+                        navMenuViewModel.setPageIndex(0)
+
+                        // enter from right if coming from login, otherwise left
                         if (navController.previousBackStackEntry?.destination?.route == NavGraph.LOGIN)
                             Animations.enterRight
                         else
@@ -106,14 +116,21 @@ class MainActivity : ComponentActivity() {
                     ) {
                     val name = it.arguments?.getString("name")
                     val make = it.arguments?.getString("make")
-                    val year = it.arguments?.getInt("year")
+                    val year = it.arguments?.getString("year")
 
-                    homeViewModel.setQuery(CarQuery(name, make, year))
+                    // set query filter before navigating to home
+                    homeViewModel.setQuery(CarQuery(name, make, year?.toInt()))
                     Home(navController, homeViewModel)
                 }
+
+                // favorites screen
                 composable(
                     NavGraph.FAVORITES,
                     enterTransition = {
+                        // reset page index for nav menu
+                        navMenuViewModel.setPageIndex(1)
+
+                        // enter from right if coming from home, otherwise left
                         if (navController.previousBackStackEntry?.destination?.route == NavGraph.HOME) {
                             Animations.enterRight
                         } else {
@@ -128,30 +145,39 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                     ) {
-                    Favorites()
+                    Favorites(navController, FavoritesViewModel())
                 }
+
+                // search screen
                 composable(
                     NavGraph.SEARCH,
                     enterTransition = {
-                      if (navController.previousBackStackEntry?.destination?.route == NavGraph.CAR) {
-                          Animations.enterLeft
-                      } else {
-                          Animations.enterRight
-                      }
+                        // reset page index for nav menu
+                        navMenuViewModel.setPageIndex(2)
+
+                        // enter from left if coming from car, otherwise right
+                        if (navController.previousBackStackEntry?.destination?.route == NavGraph.CAR) {
+                            Animations.enterLeft
+                        } else {
+                            Animations.enterRight
+                        }
                     },
                     exitTransition = { Animations.exitRight },
                     ) {
-                    Search(navController)
+                    Search(navController, SearchViewModel())
                 }
+
+                // car details screen
                 composable(
                     NavGraph.CAR,
+                    // arguments to pass car ID
                     arguments = listOf(navArgument("carID") {type = NavType.IntType}),
                     enterTransition = {
                         navMenuViewModel.setPageIndex(-1)
                         Animations.enterRight },
                     exitTransition = { Animations.exitRight },
                     ) {
-                    Car(navController,it.arguments?.getInt("carID") ?: 0)
+                    Car(navController,it.arguments?.getInt("carID") ?: -1)
                 }
             }
 

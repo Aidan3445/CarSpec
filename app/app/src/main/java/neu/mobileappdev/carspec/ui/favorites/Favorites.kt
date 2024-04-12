@@ -19,8 +19,8 @@ import neu.mobileappdev.carspec.R
 @Composable
 fun Favorites(
     navController: NavController = rememberNavController(),
+    viewModel: FavoritesViewModel = FavoritesViewModel()
 ) {
-    val viewModel: FavoritesViewModel = FavoritesViewModel()
 
     Text(modifier = Modifier.fillMaxWidth().padding(20.dp),
         text = stringResource(id = R.string.title_favorites),

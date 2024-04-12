@@ -50,13 +50,13 @@ fun Home(
 
     Column (
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween,
+        verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         Column {
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(0.dp, 20.dp),
+                    .padding(0.dp, 20.dp, 0.dp, 10.dp),
                 text = stringResource(id = R.string.title_home),
                 textAlign = TextAlign.Center,
                 fontSize = 30.sp,
@@ -67,10 +67,10 @@ fun Home(
                 Button(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(20.dp, 0.dp),
+                        .padding(50.dp, 0.dp),
                     onClick = { viewModel.clearQuery() }
                 ) {
-                    Text("Clear")
+                    Text("Clear Filter")
                 }
             }
         }
@@ -85,7 +85,7 @@ fun Home(
             LazyColumn {
                 items(cars?.size ?: 0) { index ->
                     val car = cars!!.elementAt(index)
-                    CarCard(car) {
+                    CarCard(car, index) {
                         navController.navigate("car/${car.id}")
                     }
                 }

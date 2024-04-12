@@ -1,5 +1,6 @@
 package neu.mobileappdev.carspec.ui.search
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -7,11 +8,13 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -27,14 +30,20 @@ import neu.mobileappdev.carspec.R
 @Composable
 fun Search(
     navController: NavController = rememberNavController(),
+    viewModel: SearchViewModel = SearchViewModel(),
 ) {
-    var viewModel: SearchViewModel = SearchViewModel()
+    // watch query
+    val route = viewModel.route.observeAsState()
 
-    var name by remember { mutableStateOf("") }
-    var make by remember { mutableStateOf("") }
-    var year by remember { mutableIntStateOf(0)}
+    // search fields
+    var name by remember { mutableStateOf("")}
+    var make by remember { mutableStateOf("")}
+    var year by remember { mutableStateOf("")}
 
-    Column {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        // screen title
         Text(modifier = Modifier
             .fillMaxWidth()
             .padding(20.dp),
@@ -43,14 +52,29 @@ fun Search(
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold)
 
+        // search inputs
+        Column(
+            modifier = Modifier.padding(30.dp),
+            verticalArrangement = Arrangement.spacedBy(10.dp),
+        ) {
             TextField(value = name, onValueChange = { name = it }, label = { Text("Name") })
             TextField(value = make, onValueChange = { make = it }, label = { Text("Make") })
-            TextField(value = year.toString(), onValueChange = { year = it.toInt() }, label = { Text("Model") })
+            TextField(value = year, onValueChange = { year = it }, label = { Text("Model") })
+        }
 
+        // search button
         Button(onClick = {
-            navController.navigate("home/?name=$name&make=$make&year=$year")
+            // try search with query
+            viewModel.search(name, make, year)
         }) {
             Text(text = "Search")
+        }
+
+        // navigate to search results
+        LaunchedEffect(route.value) {
+            route.value?.let {
+                navController.navigate(route.value!!)
+            }
         }
     }
 
