@@ -101,10 +101,8 @@ app.get("/api/specs/:id", async (req, res) => {
 app.get("/api/login", async (req, res) => {
     try {
         // check if the username and password are correct
-        var username = req.body.username;
-        var password = req.body.password;
-
-        console.log(username, password);
+        var username = req.query.username;
+        var password = req.query.password;
 
         if (username === "admin" && password === "password") {
             return res.json({ success: true });
