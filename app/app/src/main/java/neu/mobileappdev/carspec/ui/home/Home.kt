@@ -1,5 +1,6 @@
 package neu.mobileappdev.carspec.ui.home
 
+import android.app.Application
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,26 +21,28 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import neu.mobileappdev.carspec.R
 import neu.mobileappdev.carspec.ui.components.CarCard
+import neu.mobileappdev.carspec.ui.favorites.FavoritesViewModel
 
-@Preview(showBackground = true)
 @Composable
 fun Home(
+    application: Application,
     navController: NavController = rememberNavController(),
-    viewModel: HomeViewModel = HomeViewModel()
+    viewModel: HomeViewModel = HomeViewModel(),
+    favViewModel: FavoritesViewModel = FavoritesViewModel(application)
 ) {
-    // make view model
 
     // observe data
     val cars by viewModel.cars.observeAsState()
     val isFetching by viewModel.isFetching.observeAsState()
     val errorMessage by viewModel.errorMessage.observeAsState()
+    val favoriteCars by favViewModel.favoriteCars.observeAsState()
 
     Log.d("Home", "Cars: $cars")
 
@@ -90,10 +93,22 @@ fun Home(
             ) {
                 items(cars?.size ?: 0) { index ->
                     val car = cars!!.elementAt(index)
-                    CarCard(car, index) {
-                        navController.navigate("car/${car.id}")
+                    var isFavorite = favoriteCars?.contains(car.id)
+                    Log.d("Home", "Cars: $car")
+                    if (isFavorite == null) {
+                        isFavorite = false;
                     }
+                        CarCard(
+                            car = car,
+                            index = index,
+                            onClick = { navController.navigate("car/${car.id}") },
+                            onFavoriteClick = { favViewModel.toggleFavorite(car) },
+                            isFavorite = isFavorite
+
+                        )
+
                 }
+
             }
         } else {
             // show error message and clear query button
@@ -101,7 +116,9 @@ fun Home(
                 text = errorMessage!!,
                 color = Color.Gray,
                 fontSize = 15.sp,
-                modifier = Modifier.padding(20.dp).testTag("errorMessage")
+                modifier = Modifier
+                    .padding(20.dp)
+                    .testTag("errorMessage")
             )
         }
     }

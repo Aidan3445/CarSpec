@@ -18,8 +18,7 @@ import neu.mobileappdev.carspec.R
 @Preview(showBackground = true)
 @Composable
 fun Favorites(
-    navController: NavController = rememberNavController(),
-    viewModel: FavoritesViewModel = FavoritesViewModel()
+    navController: NavController = rememberNavController()
 ) {
 
     Text(

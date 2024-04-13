@@ -1,5 +1,6 @@
 package neu.mobileappdev.carspec
 
+import android.app.Application
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -16,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -56,6 +58,7 @@ class MainActivity : ComponentActivity() {
         val navController = rememberNavController()
         val navMenuViewModel = NavMenuViewModel()
         val homeViewModel = HomeViewModel()
+        val context = LocalContext.current
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
@@ -121,7 +124,7 @@ class MainActivity : ComponentActivity() {
 
                     // set query filter before navigating to home
                     homeViewModel.setQuery(CarQuery(name, make, year?.toInt()))
-                    Home(navController, homeViewModel)
+                    Home(application = LocalContext.current.applicationContext as Application, navController = navController, viewModel = homeViewModel)
                 }
 
                 // favorites screen
@@ -146,7 +149,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) {
-                    Favorites(navController, FavoritesViewModel())
+                    Favorites(navController)
                 }
 
                 // search screen
