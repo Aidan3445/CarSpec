@@ -8,7 +8,7 @@ object RetrofitClient {
     private const val BASE_URL: String = "https://car-spec.adaptable.app/api/"
     const val CARS: String = "cars"
     const val CAR: String = "cars/{id}"
-    const val SPECS: String = "specs"
+    const val SPECS: String = "specs/{id}"
     const val LOGIN: String = "login"
     const val HINT: String = "login/hint"
 

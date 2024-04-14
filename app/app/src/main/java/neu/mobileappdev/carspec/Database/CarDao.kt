@@ -15,4 +15,7 @@ interface CarDao {
 
     @Query("SELECT * FROM favorites")
     suspend fun getAllFavorites(): List<FavoriteCar>
+
+    @Query("SELECT * FROM favorites WHERE id = :carId")
+    suspend fun getFavoriteById(carId: Int): FavoriteCar?
 }
