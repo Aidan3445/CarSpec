@@ -7,6 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitClient {
     private const val BASE_URL: String = "https://car-spec.adaptable.app/api/"
     const val CARS: String = "cars"
+    const val CAR: String = "cars/{id}"
     const val SPECS: String = "specs"
     const val LOGIN: String = "login"
     const val HINT: String = "login/hint"
