@@ -37,5 +37,10 @@ class FavoriteRepository(application: Application) {
         return favoriteIds
     }
 
+    suspend fun isCarFavorite(carId: Int): Boolean {
+        val favoriteCar = carDao.getFavoriteById(carId)
+        return favoriteCar != null
+    }
+
 
 }

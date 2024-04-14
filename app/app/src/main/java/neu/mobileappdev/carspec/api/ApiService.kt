@@ -17,7 +17,7 @@ interface ApiService {
     ): Response<Set<Car>>
 
     // get car by id
-    @GET(RetrofitClient.CARS)
+    @GET(RetrofitClient.CAR)
     suspend fun getCar(
         @Path("id") id: Int,
     ): Response<Car>
