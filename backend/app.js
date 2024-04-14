@@ -73,7 +73,13 @@ app.get("/api/cars/:id", async (req, res) => {
             return res.status(404).json({ error: "Car not found" });
         }
 
-        return res.json(car);
+        return res.json({
+                id: car.id,
+                name: car.name,
+                make: car.make,
+                year: car.year,
+                img: car.imgURL,
+            });
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: "Server error" });
