@@ -37,8 +37,6 @@ fun CarCard(
         ),
     index: Int = 0,
     onClick: () -> Unit = { Log.d("CarCard", "onClick") },
-    onFavoriteClick: () -> Unit,
-    isFavorite: Boolean
 ) {
     Row(
         modifier =
@@ -76,12 +74,6 @@ fun CarCard(
                 .padding(25.dp, 0.dp, 10.dp, 0.dp)
 
         )
-        IconButton(onClick = onFavoriteClick) {
-            Icon(
-                painter = painterResource(id = if (isFavorite) R.drawable.ic_favorite_filled else R.drawable.ic_favorite_outline),
-                contentDescription = if (isFavorite) "Remove from Favorites" else "Add to Favorites"
-            )
-        }
     }
 
 }

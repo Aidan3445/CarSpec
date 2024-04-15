@@ -43,4 +43,17 @@ class FavoriteRepository(application: Application) {
     }
 
 
+    suspend fun getAllFavoriteCars(): List<Car> {
+        val favoriteCars = carDao.getAllFavorites()
+        return favoriteCars.map { favoriteCar ->
+            Car(
+                id = favoriteCar.id,
+                name = favoriteCar.name,
+                make = favoriteCar.make,
+                year = favoriteCar.year,
+                image = favoriteCar.imageUrl
+            )
+        }
+    }
+
 }

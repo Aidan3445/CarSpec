@@ -149,7 +149,7 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 ) {
-                    Favorites(navController)
+                    Favorites(application = LocalContext.current.applicationContext as Application,navController)
                 }
 
                 // search screen
