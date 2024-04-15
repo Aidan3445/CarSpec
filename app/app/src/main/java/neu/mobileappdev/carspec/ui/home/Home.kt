@@ -93,18 +93,11 @@ fun Home(
             ) {
                 items(cars?.size ?: 0) { index ->
                     val car = cars!!.elementAt(index)
-                    var isFavorite = favoriteCars?.contains(car.id)
                     Log.d("Home", "Cars: $car")
-                    if (isFavorite == null) {
-                        isFavorite = false;
-                    }
                         CarCard(
                             car = car,
                             index = index,
                             onClick = { navController.navigate("car/${car.id}") },
-                            onFavoriteClick = { favViewModel.toggleFavorite(car) },
-                            isFavorite = isFavorite
-
                         )
 
                 }
