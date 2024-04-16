@@ -23,7 +23,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import neu.mobileappdev.carspec.R
@@ -42,7 +41,6 @@ fun Home(
     val cars by viewModel.cars.observeAsState()
     val isFetching by viewModel.isFetching.observeAsState()
     val errorMessage by viewModel.errorMessage.observeAsState()
-    val favoriteCars by favViewModel.favoriteCars.observeAsState()
 
     Log.d("Home", "Cars: $cars")
 
@@ -97,7 +95,7 @@ fun Home(
                         CarCard(
                             car = car,
                             index = index,
-                            onClick = { navController.navigate("car/${car.id}") },
+                            onClick = { navController.navigate("car/${car.id}") }
                         )
 
                 }

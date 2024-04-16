@@ -13,27 +13,32 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import neu.mobileappdev.carspec.api.Specs
 
 @Composable
-fun SpecsPopup(specs: Specs?, onDismissRequest: () -> Unit) {
+fun SpecsPopup(specs: Specs?, onDismissRequest: () -> Unit, modifier: Modifier) {
     if (specs != null) {
         Dialog(onDismissRequest = onDismissRequest) {
             Surface(
-                modifier = Modifier.padding(16.dp),
+                modifier = modifier.padding(16.dp),
             ) {
                 Column(modifier = Modifier.padding(16.dp)) {
                     Text(text = "Specifications", style = MaterialTheme.typography.titleLarge)
                     Spacer(modifier = Modifier.height(8.dp))
-                    Text("Engine: ${specs.engine}", style = MaterialTheme.typography.bodyLarge)
-                    Text("Mileage: ${specs.mileage}", style = MaterialTheme.typography.bodyLarge)
+                    Text("Engine: ${specs.engine}", style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.testTag("Engine"))
+                    Text("Mileage: ${specs.mileage}", style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.testTag("Mileage"))
                     Text("Dimensions (inches): ${specs.dimensions.length} L x " +
                             "${specs.dimensions.width} W x ${specs.dimensions.height} H",
-                        style = MaterialTheme.typography.bodyLarge)
-                    Text("Horsepower: ${specs.horsepower}", style = MaterialTheme.typography.bodyLarge)
-                    Text("Zero to Sixty: ${specs.zeroToSixty}", style = MaterialTheme.typography.bodyLarge)
+                        style = MaterialTheme.typography.bodyLarge, modifier = Modifier.testTag("Dimensions"))
+                    Text("Horsepower: ${specs.horsepower}", style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.testTag("Horsepower"))
+                    Text("Zero to Sixty: ${specs.zeroToSixty}", style = MaterialTheme.typography.bodyLarge,
+                        modifier = Modifier.testTag("ZeroToSixty"))
 
                     Spacer(modifier = Modifier.height(16.dp))
                     Row(

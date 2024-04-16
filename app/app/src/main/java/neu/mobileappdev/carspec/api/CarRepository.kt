@@ -72,17 +72,4 @@ open class CarRepository(
             throw ApiService.FetchException(err ?: "Unknown error")
         }
     }
-
-    // add and remove favorite cars from room database
-    suspend fun addFavoriteCar(
-        car: Car,
-    ) {
-        // TODO
-    }
-
-    suspend fun removeFavoriteCar(
-        car: Car,
-    ) {
-        // TODO
-    }
 }

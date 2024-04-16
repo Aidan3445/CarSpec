@@ -3,7 +3,7 @@ package neu.mobileappdev.carspec.ui.favorites
 import android.app.Application
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
@@ -15,7 +15,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.launch
 import neu.mobileappdev.carspec.R
 import neu.mobileappdev.carspec.ui.components.CarCard
 
@@ -29,7 +28,7 @@ fun Favorites(
     val scope = rememberCoroutineScope()
 
     LazyColumn(modifier = Modifier.testTag("carList")) {
-        items(favoriteCars) { car ->
+        itemsIndexed(favoriteCars) { index, car ->
             CarCard(
                 car = car,
                 onClick = {

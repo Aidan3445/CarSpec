@@ -21,6 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -42,16 +43,17 @@ fun CarCard(
             "https://www.cars.com/i/large/in/v2/stock_photos/a1bd413b-0726-49b1-929b-53f83760953a/3f618153-c2c3-41e2-9684-5493885a6d53.png",
         ),
     index: Int = 0,
-    onClick: () -> Unit = { Log.d("CarCard", "onClick") },
+    onClick: () -> Unit = { Log.d("CarCard", "onClick") }
 ) {
     Row(
         modifier = Modifier
+            .testTag("carCard_$index")
             .height(100.dp)
             .fillMaxWidth()
             .clickable { onClick() }
             .background(colorResource(id = if (index % 2 == 0) R.color.purple_200 else R.color.purple_250))
             .padding(horizontal = 8.dp, vertical = 8.dp),
-        verticalAlignment = Alignment.CenterVertically
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         // car image
         Box(
