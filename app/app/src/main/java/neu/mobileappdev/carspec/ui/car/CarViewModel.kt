@@ -14,8 +14,7 @@ import neu.mobileappdev.carspec.api.Specs
 
 class CarViewModel(
     private val carID: Int,
-    private val carRepository: CarRepository,
-    private val favoriteRepository: FavoriteRepository,
+    private val carRepository: CarRepository
 ) : ViewModel() {
 
     private val _car = MutableLiveData<Car>()

@@ -44,7 +44,7 @@ fun Car(
 ) {
     val appContext = LocalContext.current.applicationContext as Application
     val viewModel: CarViewModel = viewModel(
-        factory = CarViewModelFactory(carID, appContext)
+        factory = CarViewModelFactory(carID)
     )
     val favoritesViewModel = FavoritesViewModel(appContext)
 
