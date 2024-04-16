@@ -9,7 +9,27 @@ data class Dimension(
     val length: Double,
     val width: Double,
     val height: Double,
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+
+        other as Dimension
+
+        return (length == other.length) &&
+                (width == other.width) &&
+                (height == other.height)
+    }
+
+    override fun hashCode(): Int {
+        var result = 1
+        result = 31 * result + length.hashCode()
+        result = 31 * result + width.hashCode()
+        result = 31 * result + height.hashCode()
+        return result
+    }
+
+}
 
 class Specs(
     val id: Int = 0,
@@ -18,7 +38,32 @@ class Specs(
     val dimensions: Dimension = Dimension(-1.0, -1.0, -1.0),
     val horsepower: Int = -1,
     val zeroToSixty: Double = -1.0,
-)
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other == null || this::class != other::class) return false
+
+        other as Specs
+
+        return (id == other.id) &&
+        (engine == other.engine) &&
+        (mileage == other.mileage) &&
+        (dimensions == other.dimensions) &&
+        (horsepower == other.horsepower) &&
+        (zeroToSixty == other.zeroToSixty)
+    }
+
+    override fun hashCode(): Int {
+        var result = id
+        result = 31 * result + engine.hashCode()
+        result = 31 * result + mileage.hashCode()
+        result = 31 * result + dimensions.hashCode()
+        result = 31 * result + horsepower.hashCode()
+        result = 31 * result + zeroToSixty.hashCode()
+        return result
+    }
+
+}
 
 // deserializer to handle the different types of products
 class SpecsDeserializer : JsonDeserializer<Specs> {

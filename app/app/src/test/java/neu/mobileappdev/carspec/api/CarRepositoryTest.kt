@@ -155,16 +155,4 @@ class CarRepositoryTest {
             assertEquals("Server Error", e.message)
         }
     }
-
-    @Test
-    fun addFavoriteCar() = runTest {
-        // TODO: IMPLEMENT and TEST
-        assert(false)
-    }
-
-    @Test
-    fun removeFavoriteCar() = runTest {
-        // TODO: IMPLEMENT and TEST
-        assert(false)
-    }
 }
