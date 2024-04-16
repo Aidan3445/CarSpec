@@ -131,16 +131,17 @@ fun Car(
             }
 
             IconButton(onClick = {
-                if (car != null) {
-                    favoritesViewModel.toggleFavorite(car)
-                }
-            },
-                modifier = Modifier.testTag("favoriteButton")) {
+                    if (car != null) {
+                        favoritesViewModel.toggleFavorite(car)
+                    }
+                                 },
+                modifier = Modifier.testTag("favButton")) {
                 Icon(
                     painter = painterResource(id = if (isFavorite)
                         R.drawable.ic_favorite_filled else R.drawable.ic_favorite_outline),
                     contentDescription = if (isFavorite) "Remove from Favorites"
-                    else "Add to Favorites"
+                    else "Add to Favorites",
+                    modifier = Modifier.testTag("favIcon")
                 )
             }
         }
