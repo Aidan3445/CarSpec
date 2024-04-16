@@ -109,17 +109,68 @@ class FavoriteRepositoryTest {
     @Test
     fun favoriteCarTest() = runTest {
         val car =  Car(1, "Car1", "Make1", 2021)
+        val car2 =  Car(2, "Car1", "Make1", 2021)
         repository.favoriteCar(car)
         Assert.assertEquals( repository.isCarFavorite(car.id), true)
-        Assert.assertEquals( repository.isCarFavorite(2), false)
+        Assert.assertEquals( repository.isCarFavorite(car2.id), false)
     }
     @Test
     fun unfavoriteCarTest() = runTest {
-        val car =  Car(1, "Car1", "Make1", 2021)
-        repository.favoriteCar(car)
-        Assert.assertEquals( repository.isCarFavorite(car.id), true)
-        Assert.assertEquals( repository.isCarFavorite(2), false)
+        val car3 =  Car(2, "Car1", "Make1", 2021)
+        Assert.assertEquals( repository.isCarFavorite(car3.id), false)
+        repository.favoriteCar(car3)
+        Assert.assertEquals( repository.isCarFavorite(car3.id), true)
+        repository.unfavoriteCar(car3)
+        Assert.assertEquals( repository.isCarFavorite(car3.id), false)
     }
+
+    @Test
+    fun getFavoriteCarIdsTest() = runTest {
+        val car = Car(1, "Car1", "Make1", 2021)
+        val car2 = Car(2, "Car1", "Make1", 2021)
+        val car3 = Car(3, "Car1", "Make1", 2021)
+        val car4 = Car(4, "Car1", "Make1", 2021)
+
+        // Favorite some cars
+        repository.favoriteCar(car)
+        repository.favoriteCar(car2)
+        repository.favoriteCar(car3)
+
+        val favoriteIds = repository.getFavoriteCarIds()
+
+        assertTrue(favoriteIds.contains(car.id))
+        assertTrue(favoriteIds.contains(car2.id))
+        assertTrue(favoriteIds.contains(car3.id))
+        assertFalse(favoriteIds.contains(car4.id))
+        assertTrue(repository.isCarFavorite(car3.id))
+        repository.unfavoriteCar(car3)
+        assertFalse(repository.isCarFavorite(car3.id))
+
+        val updatedFavoriteIds = repository.getFavoriteCarIds()
+        assertFalse(updatedFavoriteIds.contains(car3.id))
+    }
+    @Test
+    fun getFavoriteCarTest() = runTest {
+        val car = Car(1, "Car1", "Make1", 2021)
+        val car2 = Car(2, "Car1", "Make1", 2021)
+        val car3 = Car(3, "Car1", "Make1", 2021)
+        val car4 = Car(4, "Car1", "Make1", 2021)
+
+        // Favorite some cars
+        repository.favoriteCar(car)
+        repository.favoriteCar(car2)
+        repository.favoriteCar(car3)
+
+        val favoritecar = repository.getAllFavoriteCars()
+
+        assertTrue(favoritecar.contains(car))
+        assertTrue(favoritecar.contains(car2))
+        assertTrue(favoritecar.contains(car3))
+        assertFalse(favoritecar.contains(car4))
+    }
+
+
+
 
 }
 

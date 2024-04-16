@@ -36,7 +36,6 @@ class CarViewModel(
 
     init {
         fetchCar(carID)
-        fetchFavoriteStatus(carID)
         fetchSpecs(carID)
     }
 
@@ -62,25 +61,6 @@ class CarViewModel(
         }
     }
 
-    private fun fetchFavoriteStatus(carID: Int) {
-        viewModelScope.launch {
-            val isFavoriteResult = favoriteRepository.isCarFavorite(carID)
-            isFavorite.postValue(isFavoriteResult)
-        }
-    }
-
-    fun toggleFavorite(car: Car) {
-        viewModelScope.launch {
-            val isFavoriteResult = favoriteRepository.isCarFavorite(car.id)
-            if (isFavoriteResult) {
-                car.let { favoriteRepository.unfavoriteCar(car) }
-                isFavorite.postValue(false)
-            } else {
-                car.let { favoriteRepository.favoriteCar(car) }
-                isFavorite.postValue(true)
-            }
-        }
-    }
 
     private fun fetchSpecs(carID: Int) {
         isFetchingData.postValue(true)

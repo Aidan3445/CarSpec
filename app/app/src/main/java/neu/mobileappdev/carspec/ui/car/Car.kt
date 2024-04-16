@@ -33,6 +33,7 @@ import com.bumptech.glide.integration.compose.GlideImage
 import com.bumptech.glide.integration.compose.placeholder
 import neu.mobileappdev.carspec.R
 import neu.mobileappdev.carspec.ui.components.SpecsPopup
+import neu.mobileappdev.carspec.ui.favorites.FavoritesViewModel
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Preview(showBackground = true)
@@ -45,6 +46,7 @@ fun Car(
     val viewModel: CarViewModel = viewModel(
         factory = CarViewModelFactory(carID, appContext)
     )
+    val favoritesViewModel = FavoritesViewModel(appContext)
 
     val car = viewModel.car.observeAsState().value
     val carName = car?.name ?: "Loading..."
@@ -52,8 +54,8 @@ fun Car(
     val carYear = car?.year?.toString() ?: "Loading..."
 
     var showSpecsPopup by remember { mutableStateOf(false) }
-    val isFavorite = viewModel.isFavorite.observeAsState().value
-
+    val favList = favoritesViewModel.favoriteCars.observeAsState(setOf())
+    val isFavorite = car?.id?.let { it in favList.value } ?: false
     val specs = viewModel.carSpecs.observeAsState().value
 
     Column(
@@ -122,13 +124,13 @@ fun Car(
 
             IconButton(onClick = {
                 if (car != null) {
-                    viewModel.toggleFavorite(car)
+                    favoritesViewModel.toggleFavorite(car)
                 }
             }) {
                 Icon(
-                    painter = painterResource(id = if (isFavorite == true)
+                    painter = painterResource(id = if (isFavorite)
                         R.drawable.ic_favorite_filled else R.drawable.ic_favorite_outline),
-                    contentDescription = if (isFavorite == true) "Remove from Favorites"
+                    contentDescription = if (isFavorite) "Remove from Favorites"
                     else "Add to Favorites"
                 )
             }

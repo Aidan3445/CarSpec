@@ -14,7 +14,6 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
     private val _favoriteCars = MutableLiveData<Set<Int>>(setOf())
     val favoriteCars: LiveData<Set<Int>> = _favoriteCars
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> = _error
     private val _favCars = MutableLiveData<List<Car>>()
@@ -27,19 +26,22 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
 
     fun toggleFavorite(car: Car) {
         viewModelScope.launch {
-            _isLoading.value = true
+            _isLoading.postValue(true)
             try {
-                if (_favoriteCars.value?.contains(car.id) == true) {
+                val isFavoriteResult = repository.isCarFavorite(car.id)
+                if (isFavoriteResult) {
                     repository.unfavoriteCar(car)
-                    _favoriteCars.value = _favoriteCars.value?.minus(car.id)
+                    val newSet = _favoriteCars.value.orEmpty().minus(car.id)
+                    _favoriteCars.postValue(newSet)
                 } else {
                     repository.favoriteCar(car)
-                    _favoriteCars.value = _favoriteCars.value?.plus(car.id)
+                    val newSet = _favoriteCars.value.orEmpty().plus(car.id)
+                    _favoriteCars.postValue(newSet)
                 }
             } catch (e: Exception) {
-                _error.value = "Failed to update favorites: ${e.message}"
+                _error.postValue("Failed to update favorites: ${e.message}")
             } finally {
-                _isLoading.value = false
+                _isLoading.postValue(false)
             }
         }
     }
