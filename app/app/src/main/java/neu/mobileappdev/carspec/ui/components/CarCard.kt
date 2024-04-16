@@ -66,10 +66,11 @@ fun CarCard(
                 model = car.image,
                 contentDescription = "Car Image",
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .fillMaxSize()
+                    .testTag("carCardImage"),
                 contentScale = ContentScale.Fit,
                 loading = placeholder(R.drawable.ic_car_black),
-                failure = placeholder(R.drawable.ic_car_black)
+                failure = placeholder(R.drawable.ic_car_black),
             )
         }
 
@@ -84,7 +85,8 @@ fun CarCard(
             Text(
                 text = "${car.year} ${car.make} ${car.name}",
                 fontSize = 18.sp,
-                color = Color.Black
+                color = Color.Black,
+                modifier = Modifier.testTag("CarInfo")
             )
         }
     }

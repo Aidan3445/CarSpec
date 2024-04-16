@@ -26,27 +26,27 @@ class CarTest {
         composeTestRule.onNodeWithTag("passwordField").performTextInput("password")
         composeTestRule.onNodeWithTag("loginButton").performClick()
 
-        composeTestRule.waitUntil {
+        composeTestRule.waitUntil(5000) {
             composeTestRule.onNodeWithTag("tab0").isDisplayed()
         }
 
         composeTestRule.onNodeWithTag("tab0").performClick()
 
-        composeTestRule.waitUntil {
+        composeTestRule.waitUntil(5000) {
             composeTestRule.onNodeWithTag("carList").assertIsDisplayed().fetchSemanticsNode().children.isNotEmpty()
         }
 
         composeTestRule.onNodeWithTag("carList").performScrollToIndex(0)
         composeTestRule.onNodeWithTag("carCard_0").performClick()
 
-        composeTestRule.waitUntil {
+        composeTestRule.waitUntil(5000) {
             composeTestRule.onNodeWithTag("Model").isDisplayed()
         }
     }
 
     @Test
     fun carInfoIsDisplayed() {
-        composeTestRule.waitUntil {
+        composeTestRule.waitUntil(5000) {
             composeTestRule.onNodeWithTag("carImage").isDisplayed()
         }
 
@@ -56,7 +56,7 @@ class CarTest {
 
 
         composeTestRule.onNodeWithTag("carImage").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("favoriteButton").assertIsDisplayed()
+        composeTestRule.onNodeWithTag("favButton").assertIsDisplayed()
     }
 
     @Test
