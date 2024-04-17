@@ -61,19 +61,22 @@ fun Search(
             modifier = Modifier.padding(30.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            TextField(value = name,
+            TextField(
+                value = name,
                 onValueChange = { name = it },
                 label = { Text("Name") },
                 singleLine = true,
                 modifier = Modifier.testTag("nameField")
             )
-            TextField(value = make,
+            TextField(
+                value = make,
                 onValueChange = { make = it },
                 label = { Text("Make") },
                 singleLine = true,
                 modifier = Modifier.testTag("makeField")
             )
-            TextField(value = year,
+            TextField(
+                value = year,
                 onValueChange = { year = it },
                 label = { Text("Year") },
                 singleLine = true,

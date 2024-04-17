@@ -1,3 +1,6 @@
+GITHUB: https://github.com/Aidan3445/CarSpec
+SLIDES: https://docs.google.com/presentation/d/1VlHavvhRrDNI6eP52mDexrsdYQa4DpYlPl1fWUKBsaA/edit#slide=id.p
+
 
 # Car Spec API
 
@@ -23,6 +26,13 @@ Retrieve a list of cars based on optional query parameters.
   - `year`: Filter cars by manufacturing year (optional).
   - `make`: Filter cars by manufacturer (optional).
 - **Example Usage**: `cars/?year=2022&make=Toyota`
+
+
+Retrieve a specific car from it's ID
+
+- **Endpoint**: `/cars/:id`
+- **Example Usage**: `cars/3`
+
 
 ### Car Specifications
 
