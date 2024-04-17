@@ -29,9 +29,9 @@ class HomeViewModelTest {
     fun setUp() {
         repository = FakeRepo()
         viewModel = HomeViewModel(repository)
-        carObserver = Observer {  }
-        fetchingObserver = Observer {  }
-        messageObserver = Observer {  }
+        carObserver = Observer { }
+        fetchingObserver = Observer { }
+        messageObserver = Observer { }
         viewModel.cars.observeForever(carObserver)
         viewModel.isFetching.observeForever(fetchingObserver)
         viewModel.errorMessage.observeForever(messageObserver)
@@ -52,14 +52,16 @@ class HomeViewModelTest {
         // then
         assertEquals(false, viewModel.isFetching.value)
         assertEquals("", viewModel.errorMessage.value)
-        assertEquals(setOf(
-            Car(1, "Car1", "Make1", 2021),
-            Car(2, "Car2", "Make2", 2022),
-            Car(3, "Car3", "Make3", 2023),
-            Car(4, "Car4", "Make4", 2024),
-            Car(5, "Car5", "Make5", 2025),
-        ),
-            viewModel.cars.value)
+        assertEquals(
+            setOf(
+                Car(1, "Car1", "Make1", 2021),
+                Car(2, "Car2", "Make2", 2022),
+                Car(3, "Car3", "Make3", 2023),
+                Car(4, "Car4", "Make4", 2024),
+                Car(5, "Car5", "Make5", 2025),
+            ),
+            viewModel.cars.value
+        )
     }
 
     @Test
@@ -147,13 +149,15 @@ class HomeViewModelTest {
         viewModel.fetchCars()
         assertEquals(false, viewModel.isFetching.value)
         assertEquals("", viewModel.errorMessage.value)
-        assertEquals(setOf(
-            Car(1, "Car1", "Make1", 2021),
-            Car(2, "Car2", "Make2", 2022),
-            Car(3, "Car3", "Make3", 2023),
-            Car(4, "Car4", "Make4", 2024),
-            Car(5, "Car5", "Make5", 2025),
-        ), viewModel.cars.value)
+        assertEquals(
+            setOf(
+                Car(1, "Car1", "Make1", 2021),
+                Car(2, "Car2", "Make2", 2022),
+                Car(3, "Car3", "Make3", 2023),
+                Car(4, "Car4", "Make4", 2024),
+                Car(5, "Car5", "Make5", 2025),
+            ), viewModel.cars.value
+        )
 
         // when
         viewModel.setQuery(query)
@@ -175,7 +179,7 @@ class HomeViewModelTest {
         viewModel.fetchCars()
         assertEquals(false, viewModel.isFetching.value)
         assertEquals("", viewModel.errorMessage.value)
-        assertEquals(setOf(Car(5, "Car5", "Make5", 2025),), viewModel.cars.value)
+        assertEquals(setOf(Car(5, "Car5", "Make5", 2025)), viewModel.cars.value)
 
         // when
         viewModel.clearQuery()
@@ -183,13 +187,15 @@ class HomeViewModelTest {
         // then
         assertEquals(false, viewModel.isFetching.value)
         assertEquals("", viewModel.errorMessage.value)
-        assertEquals(setOf(
-            Car(1, "Car1", "Make1", 2021),
-            Car(2, "Car2", "Make2", 2022),
-            Car(3, "Car3", "Make3", 2023),
-            Car(4, "Car4", "Make4", 2024),
-            Car(5, "Car5", "Make5", 2025),
-        ), viewModel.cars.value)
+        assertEquals(
+            setOf(
+                Car(1, "Car1", "Make1", 2021),
+                Car(2, "Car2", "Make2", 2022),
+                Car(3, "Car3", "Make3", 2023),
+                Car(4, "Car4", "Make4", 2024),
+                Car(5, "Car5", "Make5", 2025),
+            ), viewModel.cars.value
+        )
     }
 
     @Test
@@ -220,7 +226,7 @@ class FakeRepo : CarRepository() {
 
     override suspend fun fetchCars(query: CarQuery): Set<Car> {
         return cars.filter {
-                    (query.name.isNullOrEmpty() || it.name == query.name) &&
+            (query.name.isNullOrEmpty() || it.name == query.name) &&
                     (query.make.isNullOrEmpty() || it.make == query.make) &&
                     (query.year == null || it.year == query.year)
         }.toSet()

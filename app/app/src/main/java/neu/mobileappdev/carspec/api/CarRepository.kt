@@ -4,7 +4,7 @@ import org.json.JSONObject
 
 open class CarRepository(
     private val apiService: ApiService = Api.apiService
-){
+) {
     // fetch cars from api
     open suspend fun fetchCars(query: CarQuery): Set<Car> {
         val response = apiService.getCars(query.name, query.make, query.year)

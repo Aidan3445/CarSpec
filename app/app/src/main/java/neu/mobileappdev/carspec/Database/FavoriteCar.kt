@@ -1,4 +1,5 @@
 package neu.mobileappdev.carspec.Database
+
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 

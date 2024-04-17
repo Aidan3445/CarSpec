@@ -33,7 +33,8 @@ class CarTest {
         composeTestRule.onNodeWithTag("tab0").performClick()
 
         composeTestRule.waitUntil(25000) {
-            composeTestRule.onNodeWithTag("carList").assertIsDisplayed().fetchSemanticsNode().children.isNotEmpty()
+            composeTestRule.onNodeWithTag("carList").assertIsDisplayed()
+                .fetchSemanticsNode().children.isNotEmpty()
         }
 
         composeTestRule.onNodeWithTag("carList").performScrollToIndex(0)

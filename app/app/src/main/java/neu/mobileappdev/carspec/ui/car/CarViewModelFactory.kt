@@ -2,8 +2,6 @@ package neu.mobileappdev.carspec.ui.car
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import android.app.Application
-import neu.mobileappdev.carspec.Database.FavoriteRepository
 import neu.mobileappdev.carspec.api.CarRepository
 
 class CarViewModelFactory(

@@ -46,11 +46,11 @@ class Specs(
         other as Specs
 
         return (id == other.id) &&
-        (engine == other.engine) &&
-        (mileage == other.mileage) &&
-        (dimensions == other.dimensions) &&
-        (horsepower == other.horsepower) &&
-        (zeroToSixty == other.zeroToSixty)
+                (engine == other.engine) &&
+                (mileage == other.mileage) &&
+                (dimensions == other.dimensions) &&
+                (horsepower == other.horsepower) &&
+                (zeroToSixty == other.zeroToSixty)
     }
 
     override fun hashCode(): Int {

@@ -29,13 +29,15 @@ class CarRepositoryTest {
         val result = repository.fetchCars(query)
 
         // then
-        assertEquals(setOf(
-            Car(1, "Car1", "Make1", 2021),
-            Car(2, "Car2", "Make2", 2022),
-            Car(3, "Car3", "Make3", 2023),
-            Car(4, "Car4", "Make4", 2024),
-            Car(5, "Car5", "Make5", 2025),
-        ), result)
+        assertEquals(
+            setOf(
+                Car(1, "Car1", "Make1", 2021),
+                Car(2, "Car2", "Make2", 2022),
+                Car(3, "Car3", "Make3", 2023),
+                Car(4, "Car4", "Make4", 2024),
+                Car(5, "Car5", "Make5", 2025),
+            ), result
+        )
     }
 
     @Test
@@ -47,9 +49,11 @@ class CarRepositoryTest {
         val result = repository.fetchCars(query)
 
         // then
-        assertEquals(setOf(
-            Car(1, "Car1", "Make1", 2021),
-        ), result)
+        assertEquals(
+            setOf(
+                Car(1, "Car1", "Make1", 2021),
+            ), result
+        )
     }
 
     @Test

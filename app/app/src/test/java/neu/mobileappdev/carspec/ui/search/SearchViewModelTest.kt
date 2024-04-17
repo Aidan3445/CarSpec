@@ -17,7 +17,7 @@ class SearchViewModelTest {
     @Before
     fun setUp() {
         viewModel = SearchViewModel()
-        observer = Observer {  }
+        observer = Observer { }
         viewModel.route.observeForever(observer)
     }
 

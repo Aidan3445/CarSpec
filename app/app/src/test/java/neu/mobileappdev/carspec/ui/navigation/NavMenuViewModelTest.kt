@@ -18,7 +18,7 @@ class NavMenuViewModelTest {
     @Before
     fun setUp() {
         viewModel = NavMenuViewModel()
-        observer = Observer {  }
+        observer = Observer { }
         viewModel.pageIndex.observeForever(observer)
     }
 

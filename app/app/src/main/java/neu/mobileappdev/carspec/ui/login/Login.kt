@@ -44,7 +44,9 @@ fun Login(
     val state = remember { SnackbarHostState() }
     SnackbarHost(
         hostState = remember { state },
-        modifier = Modifier.fillMaxWidth().testTag("snackbarHost"),
+        modifier = Modifier
+            .fillMaxWidth()
+            .testTag("snackbarHost"),
     )
 
     // use column to stack the username, password, and login button
@@ -85,7 +87,9 @@ fun Login(
             Text(
                 text = "Forgot login? Click for a hint.",
                 textDecoration = TextDecoration.Underline,
-                modifier = Modifier.clickable { viewModel.getHint() }.testTag("hintLink"),
+                modifier = Modifier
+                    .clickable { viewModel.getHint() }
+                    .testTag("hintLink"),
             )
         }
 
@@ -95,7 +99,9 @@ fun Login(
                 Log.d("LoginButton", "B: $username, $password")
                 viewModel.tryLogin(username, password)
             },
-            modifier = Modifier.fillMaxWidth(.9f).testTag("loginButton"),
+            modifier = Modifier
+                .fillMaxWidth(.9f)
+                .testTag("loginButton"),
         ) {
             Text(text = "Login")
         }

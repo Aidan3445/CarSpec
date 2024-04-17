@@ -1,6 +1,5 @@
 package neu.mobileappdev.carspec.ui.car
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

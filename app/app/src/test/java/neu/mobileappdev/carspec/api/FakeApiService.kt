@@ -14,16 +14,26 @@ class FakeApiService : ApiService {
     )
 
     private val specs = setOf(
-        Specs(1, "Engine1", "1 mpg",
-            Dimension(1.0, 1.1, 1.11), 111, 1.1),
-        Specs(2, "Engine2", "2 mpg",
-            Dimension(2.0, 2.2, 2.22), 222, 2.2),
-        Specs(3, "Engine3", "3 mpg",
-            Dimension(3.0, 3.3, 3.33), 333, 3.3),
-        Specs(4, "Engine4", "4 mpg",
-            Dimension(4.0, 4.4, 4.44), 444, 4.4),
-        Specs(5, "Engine5", "5 mpg",
-            Dimension(5.0, 5.5, 5.55), 555, 5.5),
+        Specs(
+            1, "Engine1", "1 mpg",
+            Dimension(1.0, 1.1, 1.11), 111, 1.1
+        ),
+        Specs(
+            2, "Engine2", "2 mpg",
+            Dimension(2.0, 2.2, 2.22), 222, 2.2
+        ),
+        Specs(
+            3, "Engine3", "3 mpg",
+            Dimension(3.0, 3.3, 3.33), 333, 3.3
+        ),
+        Specs(
+            4, "Engine4", "4 mpg",
+            Dimension(4.0, 4.4, 4.44), 444, 4.4
+        ),
+        Specs(
+            5, "Engine5", "5 mpg",
+            Dimension(5.0, 5.5, 5.55), 555, 5.5
+        ),
     )
 
     override suspend fun getCars(name: String?, make: String?, year: Int?): Response<Set<Car>> {
@@ -42,7 +52,9 @@ class FakeApiService : ApiService {
                 404,
                 ResponseBody.create(
                     MediaType.parse("text/plain"),
-                    "{error: Car not found}"))
+                    "{error: Car not found}"
+                )
+            )
 
         return Response.success(car)
     }
@@ -53,7 +65,9 @@ class FakeApiService : ApiService {
                 404,
                 ResponseBody.create(
                     MediaType.parse("text/plain"),
-                    "{error: Car not found}"))
+                    "{error: Car not found}"
+                )
+            )
 
         return Response.success(spec)
     }
@@ -67,7 +81,9 @@ class FakeApiService : ApiService {
             401,
             ResponseBody.create(
                 MediaType.parse("text/plain"),
-                "{error: Invalid username or password}"))
+                "{error: Invalid username or password}"
+            )
+        )
     }
 
     override suspend fun getHint(): Response<LoginResponse> {
@@ -81,7 +97,9 @@ class FailApiService : ApiService {
             500,
             ResponseBody.create(
                 MediaType.parse("text/plain"),
-                "{error: Server Error}"))
+                "{error: Server Error}"
+            )
+        )
     }
 
     override suspend fun getCar(id: Int): Response<Car> {
@@ -89,7 +107,9 @@ class FailApiService : ApiService {
             500,
             ResponseBody.create(
                 MediaType.parse("text/plain"),
-                "{error: Server Error}"))
+                "{error: Server Error}"
+            )
+        )
     }
 
     override suspend fun getSpecs(id: Int): Response<Specs> {
@@ -97,7 +117,9 @@ class FailApiService : ApiService {
             500,
             ResponseBody.create(
                 MediaType.parse("text/plain"),
-                "{error: Server Error}"))
+                "{error: Server Error}"
+            )
+        )
     }
 
     override suspend fun login(username: String, password: String): Response<LoginResponse> {
@@ -105,7 +127,9 @@ class FailApiService : ApiService {
             500,
             ResponseBody.create(
                 MediaType.parse("text/plain"),
-                "{error: Server Error}"))
+                "{error: Server Error}"
+            )
+        )
     }
 
     override suspend fun getHint(): Response<LoginResponse> {
@@ -113,6 +137,8 @@ class FailApiService : ApiService {
             500,
             ResponseBody.create(
                 MediaType.parse("text/plain"),
-                "{error: Server Error}"))
+                "{error: Server Error}"
+            )
+        )
     }
 }

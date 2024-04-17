@@ -2,10 +2,8 @@ package neu.mobileappdev.carspec.Database
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import neu.mobileappdev.carspec.api.Car
-import neu.mobileappdev.carspec.api.CarQuery
 import org.junit.Assert
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -94,12 +92,13 @@ class FakeFavoriteRepository {
 }
 
 
-
 class FavoriteRepositoryTest {
     private lateinit var fakeCarDao: FakeCarDao
     private lateinit var repository: FakeFavoriteRepository
+
     @get:Rule
     val rule = InstantTaskExecutorRule()
+
     @Before
     fun setup() {
         fakeCarDao = FakeCarDao()
@@ -108,20 +107,21 @@ class FavoriteRepositoryTest {
 
     @Test
     fun favoriteCarTest() = runTest {
-        val car =  Car(1, "Car1", "Make1", 2021)
-        val car2 =  Car(2, "Car1", "Make1", 2021)
+        val car = Car(1, "Car1", "Make1", 2021)
+        val car2 = Car(2, "Car1", "Make1", 2021)
         repository.favoriteCar(car)
-        Assert.assertEquals( repository.isCarFavorite(car.id), true)
-        Assert.assertEquals( repository.isCarFavorite(car2.id), false)
+        Assert.assertEquals(repository.isCarFavorite(car.id), true)
+        Assert.assertEquals(repository.isCarFavorite(car2.id), false)
     }
+
     @Test
     fun unfavoriteCarTest() = runTest {
-        val car3 =  Car(2, "Car1", "Make1", 2021)
-        Assert.assertEquals( repository.isCarFavorite(car3.id), false)
+        val car3 = Car(2, "Car1", "Make1", 2021)
+        Assert.assertEquals(repository.isCarFavorite(car3.id), false)
         repository.favoriteCar(car3)
-        Assert.assertEquals( repository.isCarFavorite(car3.id), true)
+        Assert.assertEquals(repository.isCarFavorite(car3.id), true)
         repository.unfavoriteCar(car3)
-        Assert.assertEquals( repository.isCarFavorite(car3.id), false)
+        Assert.assertEquals(repository.isCarFavorite(car3.id), false)
     }
 
     @Test
@@ -149,6 +149,7 @@ class FavoriteRepositoryTest {
         val updatedFavoriteIds = repository.getFavoriteCarIds()
         assertFalse(updatedFavoriteIds.contains(car3.id))
     }
+
     @Test
     fun getFavoriteCarTest() = runTest {
         val car = Car(1, "Car1", "Make1", 2021)
@@ -168,8 +169,6 @@ class FavoriteRepositoryTest {
         assertTrue(favoritecar.contains(car3))
         assertFalse(favoritecar.contains(car4))
     }
-
-
 
 
 }

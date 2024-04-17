@@ -28,7 +28,7 @@ class LoginViewModelTest {
     fun setUp() {
         repository = FakeRepo()
         viewModel = LoginViewModel(repository)
-        observer = Observer {  }
+        observer = Observer { }
         viewModel.message.observeForever(observer)
 
         Dispatchers.setMain(Dispatchers.Unconfined)
@@ -119,7 +119,10 @@ class LoginViewModelTest {
         viewModel.loginSuccess.observeForever {
             assert(false)
         }
-        assertEquals("An error occurred while trying to login\nPlease Try Again", viewModel.message.value)
+        assertEquals(
+            "An error occurred while trying to login\nPlease Try Again",
+            viewModel.message.value
+        )
     }
 
     @Test

@@ -89,11 +89,11 @@ fun Home(
                 items(cars?.size ?: 0) { index ->
                     val car = cars!!.elementAt(index)
                     Log.d("Home", "Cars: $car")
-                        CarCard(
-                            car = car,
-                            index = index,
-                            onClick = { navController.navigate("car/${car.id}") }
-                        )
+                    CarCard(
+                        car = car,
+                        index = index,
+                        onClick = { navController.navigate("car/${car.id}") }
+                    )
 
                 }
 

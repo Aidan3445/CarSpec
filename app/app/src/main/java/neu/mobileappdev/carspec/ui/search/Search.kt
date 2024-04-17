@@ -61,12 +61,24 @@ fun Search(
             modifier = Modifier.padding(30.dp),
             verticalArrangement = Arrangement.spacedBy(10.dp),
         ) {
-            TextField(value = name, onValueChange = { name = it }, label = { Text("Name") },
-                modifier = Modifier.testTag("nameField"))
-            TextField(value = make, onValueChange = { make = it }, label = { Text("Make") },
-                modifier = Modifier.testTag("makeField"))
-            TextField(value = year, onValueChange = { year = it }, label = { Text("Model") },
-                modifier = Modifier.testTag("yearField"))
+            TextField(value = name,
+                onValueChange = { name = it },
+                label = { Text("Name") },
+                singleLine = true,
+                modifier = Modifier.testTag("nameField")
+            )
+            TextField(value = make,
+                onValueChange = { make = it },
+                label = { Text("Make") },
+                singleLine = true,
+                modifier = Modifier.testTag("makeField")
+            )
+            TextField(value = year,
+                onValueChange = { year = it },
+                label = { Text("Year") },
+                singleLine = true,
+                modifier = Modifier.testTag("yearField")
+            )
         }
 
         // search button
@@ -74,9 +86,9 @@ fun Search(
             modifier = Modifier.testTag("searchButton"),
             enabled = name.isNotEmpty() || make.isNotEmpty() || year.isNotEmpty(),
             onClick = {
-            // try search with query
-            viewModel.search(name, make, year)
-        }) {
+                // try search with query
+                viewModel.search(name, make, year)
+            }) {
             Text(text = "Search")
         }
 

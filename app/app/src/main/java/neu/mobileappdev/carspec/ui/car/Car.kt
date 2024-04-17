@@ -133,15 +133,19 @@ fun Car(
                 Text(text = "More Specs")
             }
 
-            IconButton(onClick = {
+            IconButton(
+                onClick = {
                     if (car != null) {
                         favoritesViewModel.toggleFavorite(car)
                     }
-                                 },
-                modifier = Modifier.testTag("favButton")) {
+                },
+                modifier = Modifier.testTag("favButton")
+            ) {
                 Icon(
-                    painter = painterResource(id = if (isFavorite)
-                        R.drawable.ic_favorite_filled else R.drawable.ic_favorite_outline),
+                    painter = painterResource(
+                        id = if (isFavorite)
+                            R.drawable.ic_favorite_filled else R.drawable.ic_favorite_outline
+                    ),
                     contentDescription = if (isFavorite) "Remove from Favorites"
                     else "Add to Favorites",
                     modifier = Modifier.testTag("favIcon")
@@ -149,7 +153,11 @@ fun Car(
             }
         }
         if (showSpecsPopup) {
-            SpecsPopup(specs = specs, onDismissRequest = { showSpecsPopup = false }, modifier = Modifier.testTag("specsPopup"))
+            SpecsPopup(
+                specs = specs,
+                onDismissRequest = { showSpecsPopup = false },
+                modifier = Modifier.testTag("specsPopup")
+            )
         }
     }
 }

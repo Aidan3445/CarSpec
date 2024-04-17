@@ -87,10 +87,11 @@ class FavoriteTest {
         Thread.sleep(3000)
 
         composeTestRule.waitUntil(5000) {
-            composeTestRule.onNodeWithTag("favIcon",  useUnmergedTree = true).isDisplayed()
+            composeTestRule.onNodeWithTag("favIcon", useUnmergedTree = true).isDisplayed()
         }
 
-        composeTestRule.onNodeWithTag("favIcon", useUnmergedTree = true).assertContentDescriptionEquals("Add to Favorites")
+        composeTestRule.onNodeWithTag("favIcon", useUnmergedTree = true)
+            .assertContentDescriptionEquals("Add to Favorites")
 
         composeTestRule.waitForIdle()
 
@@ -98,7 +99,7 @@ class FavoriteTest {
 
         composeTestRule.waitForIdle()
 
-        composeTestRule.waitUntilDoesNotExist( hasContentDescription("Add to Favorites"), 5000)
+        composeTestRule.waitUntilDoesNotExist(hasContentDescription("Add to Favorites"), 5000)
 
         composeTestRule.onNodeWithTag("tab1").performClick()
 

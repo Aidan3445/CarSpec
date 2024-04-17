@@ -10,7 +10,7 @@ import neu.mobileappdev.carspec.Database.FavoriteRepository
 import neu.mobileappdev.carspec.api.Car
 
 class FavoritesViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: FavoriteRepository =  FavoriteRepository(application)
+    private val repository: FavoriteRepository = FavoriteRepository(application)
     private val _favoriteCars = MutableLiveData<Set<Int>>(setOf())
     val favoriteCars: LiveData<Set<Int>> = _favoriteCars
     private val _isLoading = MutableLiveData<Boolean>()
@@ -60,7 +60,7 @@ class FavoritesViewModel(application: Application) : AndroidViewModel(applicatio
         }
     }
 
-   private fun getAllFavorites() {
+    private fun getAllFavorites() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
