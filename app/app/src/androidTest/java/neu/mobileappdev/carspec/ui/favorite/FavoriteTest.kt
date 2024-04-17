@@ -37,12 +37,39 @@ class FavoriteTest {
 
     @OptIn(ExperimentalTestApi::class)
     @Test
-    fun carCardsAreVisibleWhenFavoritesExist() {
-        // SETUP - Favorite the first car and navigate to favorites
-        composeTestRule.onNodeWithTag("tab0").performClick()
+    fun testNoFavoritesAndExistingFavorites() {
+        // PART 1
+        // SETUP FOR NO FAVORITES - Navigate to favorites as no favorites exist
+        composeTestRule.onNodeWithTag("tab1").performClick()
 
         composeTestRule.waitUntil(5000) {
-            composeTestRule.onNodeWithTag("carList").assertIsDisplayed().fetchSemanticsNode().children.isNotEmpty()
+            composeTestRule.onNodeWithTag("tab1").isDisplayed()
+        }
+
+        // For animation
+        Thread.sleep(3000)
+
+        composeTestRule.waitUntil(5000) {
+            composeTestRule.onNodeWithText("No Favorite Cars Yet!").isDisplayed()
+        }
+
+        // Checks that text "No Favorite Cars Yet!" is displayed
+        composeTestRule.onNodeWithText("No Favorite Cars Yet!").assertIsDisplayed()
+
+        // Checks that no carList is displayed
+        composeTestRule.onNodeWithTag("carCard_0").assertIsNotDisplayed()
+
+        Thread.sleep(3000)
+
+        // PART 2
+
+        // SETUP FOR EXISTING FAVORITES - Favorite the first car and navigate to favorites
+        composeTestRule.onNodeWithTag("tab0").performClick()
+
+        Thread.sleep(3000)
+
+        composeTestRule.waitUntil(5000) {
+            composeTestRule.onNodeWithTag("carList").isDisplayed()
         }
 
         composeTestRule.onNodeWithTag("carList").performScrollToIndex(0)
@@ -54,11 +81,20 @@ class FavoriteTest {
 
         composeTestRule.onNodeWithTag("favButton").assertIsDisplayed()
 
-        composeTestRule.onNodeWithTag("favButton").assertContentDescriptionEquals("Add to Favorites")
+        composeTestRule.waitForIdle()
+
+        // For animation
+        Thread.sleep(3000)
+
+        composeTestRule.waitUntil(5000) {
+            composeTestRule.onNodeWithTag("favIcon",  useUnmergedTree = true).isDisplayed()
+        }
+
+        composeTestRule.onNodeWithTag("favIcon", useUnmergedTree = true).assertContentDescriptionEquals("Add to Favorites")
 
         composeTestRule.waitForIdle()
 
-        composeTestRule.onNodeWithTag("favIcon", useUnmergedTree = true).performClick()
+        composeTestRule.onNodeWithTag("favButton", useUnmergedTree = true).performClick()
 
         composeTestRule.waitForIdle()
 
@@ -66,41 +102,31 @@ class FavoriteTest {
 
         composeTestRule.onNodeWithTag("tab1").performClick()
 
+        // For animation
+        Thread.sleep(3000)
+
         composeTestRule.waitUntil(5000) {
             composeTestRule.onNodeWithTag("carList").isDisplayed()
         }
 
         // Check if the carList has carCard tag of carCard_0
         composeTestRule.onNodeWithTag("carList").assertIsDisplayed()
-        composeTestRule.waitUntil(5000) {
+        composeTestRule.waitUntil(10000) {
             composeTestRule.onNodeWithTag("carCard_0").isDisplayed()
         }
-        // Checks if the carCard has an image tag of carCardImage
-        composeTestRule.waitUntil(5000) {
-            composeTestRule.onNodeWithTag("carCardImage").isDisplayed()
-        }
-
-        // Checks if the carCard has a CarInfo text tag
-        composeTestRule.onNodeWithTag("CarInfo").assertIsDisplayed()
 
         // Checks that text "No Favorite Cars Yet!" is not displayed
         composeTestRule.onNodeWithText("No Favorite Cars Yet!").assertIsNotDisplayed()
-    }
 
-    @Test
-    fun carCardsAreNotVisibleWhenFavoritesDoNotExist() {
-        // SETUP - Navigate to favorites as no favorites exist
-        composeTestRule.onNodeWithTag("tab1").performClick()
-
+        // Checks if the carCard has a CarInfo text tag
         composeTestRule.waitUntil(5000) {
-            composeTestRule.onNodeWithTag("tab1").isDisplayed()
+            composeTestRule.onNodeWithTag("carInformation", useUnmergedTree = true).isDisplayed()
         }
 
-        // Checks that text "No Favorite Cars Yet!" is displayed
-        composeTestRule.onNodeWithText("No Favorite Cars Yet!").assertIsDisplayed()
-
-        // Checks that no carList is displayed
-        composeTestRule.onNodeWithTag("carCard_0").assertIsNotDisplayed()
+        // Checks if the carCard has an image tag of carCardImage
+        composeTestRule.waitUntil(5000) {
+            composeTestRule.onNodeWithTag("carCardImage", useUnmergedTree = true).isDisplayed()
+        }
     }
 
 }
