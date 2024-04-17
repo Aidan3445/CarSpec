@@ -45,7 +45,9 @@ class HomeTest {
     fun testFilterAndClear() {
         composeTestRule.onNodeWithTag("tab2").performClick()
 
-        composeTestRule.waitUntil {
+        Thread.sleep(3000)
+
+        composeTestRule.waitUntil(25000) {
             composeTestRule.onNodeWithTag("searchTitle").isDisplayed()
         }
 

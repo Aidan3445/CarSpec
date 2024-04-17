@@ -86,7 +86,7 @@ fun CarCard(
                 text = "${car.year} ${car.make} ${car.name}",
                 fontSize = 18.sp,
                 color = Color.Black,
-                modifier = Modifier.testTag("CarInfo")
+                modifier = Modifier.testTag("carInformation")
             )
         }
     }
