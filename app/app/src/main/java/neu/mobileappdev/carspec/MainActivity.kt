@@ -21,8 +21,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -32,7 +32,6 @@ import androidx.navigation.navArgument
 import neu.mobileappdev.carspec.api.CarQuery
 import neu.mobileappdev.carspec.ui.car.Car
 import neu.mobileappdev.carspec.ui.favorites.Favorites
-import neu.mobileappdev.carspec.ui.favorites.FavoritesViewModel
 import neu.mobileappdev.carspec.ui.home.Home
 import neu.mobileappdev.carspec.ui.home.HomeViewModel
 import neu.mobileappdev.carspec.ui.login.Login
@@ -47,18 +46,23 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+
+
         setContent {
-            Content()
+            val navController = rememberNavController()
+            val navMenuViewModel = NavMenuViewModel()
+            val homeViewModel = HomeViewModel()
+
+            Content(navController, navMenuViewModel, homeViewModel)
         }
     }
 
-    @Preview(showBackground = true)
     @Composable
-    fun Content() {
-        val navController = rememberNavController()
-        val navMenuViewModel = NavMenuViewModel()
-        val homeViewModel = HomeViewModel()
-        val context = LocalContext.current
+    fun Content(
+        navController: NavHostController,
+        navMenuViewModel: NavMenuViewModel,
+        homeViewModel: HomeViewModel
+    ) {
 
         val navBackStackEntry by navController.currentBackStackEntryAsState()
 
@@ -124,7 +128,7 @@ class MainActivity : ComponentActivity() {
 
                     // set query filter before navigating to home
                     homeViewModel.setQuery(CarQuery(name, make, year?.toInt()))
-                    Home(application = LocalContext.current.applicationContext as Application, navController = navController, viewModel = homeViewModel)
+                    Home(navController = navController, viewModel = homeViewModel)
                 }
 
                 // favorites screen
@@ -182,7 +186,7 @@ class MainActivity : ComponentActivity() {
                     },
                     exitTransition = { Animations.exitRight },
                 ) {
-                    Car(navController, it.arguments?.getInt("carID") ?: -1)
+                    Car(it.arguments?.getInt("carID") ?: -1)
                 }
             }
 

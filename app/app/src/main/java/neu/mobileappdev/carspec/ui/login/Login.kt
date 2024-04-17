@@ -18,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -56,8 +57,8 @@ fun Login(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         // remember fields
-        var username by remember { mutableStateOf("") }
-        var password by remember { mutableStateOf("") }
+        var username by rememberSaveable { mutableStateOf("") }
+        var password by rememberSaveable { mutableStateOf("") }
 
         Column(
             verticalArrangement = Arrangement.spacedBy(10.dp),

@@ -38,7 +38,7 @@ class FakeCarDao : CarDao {
 
 }
 
-class FakeFavoriteRepository() {
+class FakeFavoriteRepository {
     private var carDao: FakeCarDao = FakeCarDao()
 
     suspend fun favoriteCar(car: Car) {

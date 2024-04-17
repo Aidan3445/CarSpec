@@ -12,7 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,9 +37,9 @@ fun Search(
     val route = viewModel.route.observeAsState()
 
     // search fields
-    var name by remember { mutableStateOf("") }
-    var make by remember { mutableStateOf("") }
-    var year by remember { mutableStateOf("") }
+    var name by rememberSaveable { mutableStateOf("") }
+    var make by rememberSaveable { mutableStateOf("") }
+    var year by rememberSaveable { mutableStateOf("") }
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

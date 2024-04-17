@@ -4,7 +4,7 @@ import okhttp3.MediaType
 import okhttp3.ResponseBody
 import retrofit2.Response
 
-class FakeApiService() : ApiService {
+class FakeApiService : ApiService {
     private val cars = setOf(
         Car(1, "Car1", "Make1", 2021),
         Car(2, "Car2", "Make2", 2022),
@@ -75,7 +75,7 @@ class FakeApiService() : ApiService {
     }
 }
 
-class FailApiService() : ApiService {
+class FailApiService : ApiService {
     override suspend fun getCars(name: String?, make: String?, year: Int?): Response<Set<Car>> {
         return Response.error(
             500,

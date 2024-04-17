@@ -150,7 +150,7 @@ class LoginViewModelTest {
     }
 }
 
-open class FakeRepo() : LoginRepository() {
+open class FakeRepo : LoginRepository() {
     override suspend fun login(username: String, password: String): Boolean {
         return username == "admin" && password == "password"
     }
@@ -160,13 +160,13 @@ open class FakeRepo() : LoginRepository() {
     }
 }
 
-class FetchExceptionRepo() : FakeRepo() {
+class FetchExceptionRepo : FakeRepo() {
     override suspend fun login(username: String, password: String): Boolean {
         throw ApiService.FetchException("fetch exception")
     }
 }
 
-class OtherExceptionRepo() : FakeRepo() {
+class OtherExceptionRepo : FakeRepo() {
     override suspend fun login(username: String, password: String): Boolean {
         throw Exception("other exception")
     }

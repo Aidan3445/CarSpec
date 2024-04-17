@@ -1,6 +1,5 @@
 package neu.mobileappdev.carspec.ui.home
 
-import android.app.Application
 import android.util.Log
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,15 +26,13 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import neu.mobileappdev.carspec.R
 import neu.mobileappdev.carspec.ui.components.CarCard
-import neu.mobileappdev.carspec.ui.favorites.FavoritesViewModel
 
 @Composable
 fun Home(
-    application: Application,
     navController: NavController = rememberNavController(),
     viewModel: HomeViewModel = HomeViewModel(),
-    favViewModel: FavoritesViewModel = FavoritesViewModel(application)
 ) {
+
 
     // observe data
     val cars by viewModel.cars.observeAsState()
