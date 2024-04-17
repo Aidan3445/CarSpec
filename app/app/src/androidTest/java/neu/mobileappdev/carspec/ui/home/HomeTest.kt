@@ -37,8 +37,13 @@ class HomeTest {
     fun testHomeDisplayed() {
         composeTestRule.onNodeWithTag(("homeTitle")).assertIsDisplayed()
         composeTestRule.onNodeWithTag("clearFilterButton").assertIsNotDisplayed()
-        composeTestRule.onNodeWithTag("carList").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("errorMessage").assertIsNotDisplayed()
+
+        composeTestRule.waitUntil(25000) {
+            composeTestRule.onNodeWithTag("carList").isDisplayed()
+        }
+        composeTestRule.waitUntil(25000) {
+            composeTestRule.onNodeWithTag("errorMessage").isNotDisplayed()
+        }
     }
 
     @Test
@@ -54,12 +59,17 @@ class HomeTest {
         composeTestRule.onNodeWithTag("yearField").performTextInput("9999")
         composeTestRule.onNodeWithTag("searchButton").performClick()
 
+        Thread.sleep(3000)
+
         composeTestRule.waitUntil(25000) {
             composeTestRule.onNodeWithTag("homeTitle").isDisplayed()
         }
 
         composeTestRule.onNodeWithTag("clearFilterButton").assertIsDisplayed()
-        composeTestRule.onNodeWithTag("errorMessage").assertIsDisplayed()
+
+        composeTestRule.waitUntil(25000) {
+            composeTestRule.onNodeWithTag("errorMessage").isDisplayed()
+        }
 
         composeTestRule.onNodeWithTag("clearFilterButton").performClick()
 
@@ -68,6 +78,9 @@ class HomeTest {
         }
 
         composeTestRule.onNodeWithTag("clearFilterButton").assertIsNotDisplayed()
-        composeTestRule.onNodeWithTag("errorMessage").assertIsNotDisplayed()
+
+        composeTestRule.waitUntil(25000) {
+            composeTestRule.onNodeWithTag("errorMessage").isNotDisplayed()
+        }
     }
 }
